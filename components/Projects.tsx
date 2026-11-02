@@ -21,6 +21,8 @@ const projects = [
       "Green Screen Effect: Replaced backgrounds dynamically based on color masking.",
     ],
     github: "https://github.com/d0stMalone/Video-Effects",
+    image: "/projects/video-effects-halo.png",
+    imageAlt: "Video Effects project output: face detection with a halo effect",
     skills: ["C++", "OpenCV", "Computer Vision", "Real-time Processing", "Image Manipulation"],
   },
   {
@@ -184,6 +186,10 @@ function ProjectCard({ project }) {
           <ChevronDown className="w-5 h-5 text-emerald-300" />
         </motion.button>
       </motion.div>
+
+      {project.image && (
+        <img src={project.image} alt={project.imageAlt || project.title} className="mt-4 max-h-80 w-full border border-white/10 object-cover" />
+      )}
 
       <motion.div layout className="mt-4">
         <motion.p layout className="text-zinc-300">

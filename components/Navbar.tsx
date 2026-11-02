@@ -93,6 +93,7 @@ export default function Navbar() {
       >
         <div className="flex-1 overflow-y-auto p-8">
           <p className="hud-label">FIELD / ROBOTICS</p>
+          <img src="/animated-portrait.webp" alt="Keval Visaria" className="mt-6 h-28 w-28 border border-emerald-400/40 object-cover" />
           <button onClick={() => scrollToSection("about")} className="mt-4 text-left">
             <span className="font-display text-3xl font-bold leading-tight tracking-tight text-zinc-50">
               Keval <span className="gradient-text">Visaria</span>

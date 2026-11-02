@@ -44,6 +44,8 @@ export default function About() {
           <div>
             <p className="section-index">01 / ABOUT</p>
             <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl">About me</h2>
+            <img src="/robot-character.webp" alt="Field robot illustration" className="mt-6 border border-white/10 object-cover" />
+            <p className="mt-2 font-mono text-[10px] tracking-[0.18em] text-zinc-500">FIELD UNIT — ILLUSTRATION</p>
           </div>
           <div className="space-y-5 text-lg leading-relaxed text-zinc-300">
             <p>
