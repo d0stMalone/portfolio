@@ -2,76 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 17, 24, 39;
-  --background-end-rgb: 17, 24, 39;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-}
-
-/* Enhanced grid pattern */
-.grid-pattern {
-  background-image: linear-gradient(to right, rgba(56, 189, 248, 0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-.grid-pattern::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: linear-gradient(45deg, rgba(56, 189, 248, 0.05) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(56, 189, 248, 0.05) 25%, transparent 25%);
-  background-size: 40px 40px;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-/* Custom scrollbar styles */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1a202c;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #22d3ee;
-  border-radius: 4px;
-  opacity: 0.3;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #06b6d4;
-}
-
-/* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
 }
 
-/* Section transitions */
-section {
-  transition: all 0.5s ease-in-out;
+body {
+  background-color: #050807;
+  color: #e4e4e7;
 }
 
-/* Gradient text effect */
+/* Field-console panel: flat, bordered, with a corner tick */
+.panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.panel-hover {
+  transition: border-color 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+}
+
+.panel-hover:hover {
+  border-color: rgba(52, 211, 153, 0.45);
+  transform: translateY(-2px);
+}
+
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6ee7b7;
+}
+
+.section-index {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: #a1a1aa;
+}
+
 .gradient-text {
-  background: linear-gradient(45deg, #22d3ee, #0ea5e9);
+  background: linear-gradient(90deg, #34d399, #22d3ee 60%, #a3e635);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
+::selection {
+  background: #34d399;
+  color: #050807;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0f0e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #34d399;
+}
+
+section {
+  scroll-margin-top: 96px;
+}

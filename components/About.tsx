@@ -1,126 +1,69 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code, Cpu, Zap } from "lucide-react"
+import { Bot, Radar, Route, Wrench } from "lucide-react"
+
+const telemetry = [
+  { icon: Bot, label: "Fleet in production", value: "10+ AMRs" },
+  { icon: Radar, label: "Sensors validated", value: "LiDAR · Camera · Radar · GPS/GNSS · IMU" },
+  { icon: Route, label: "Core stack", value: "ROS2 · C++ · Python" },
+  { icon: Wrench, label: "Day-to-day", value: "Field testing · Diagnostics · Root-cause analysis" },
+]
 
 export default function About() {
   return (
-    <motion.section
-      id="about"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="py-20"
-    >
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="mb-16 relative"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-xl -z-10 blur-xl"></div>
-          <div className="bg-gray-800/60 backdrop-blur-md p-10 rounded-xl border border-cyan-500/20 shadow-xl">
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-              className="flex flex-col items-center text-center"
-            >
-              <div className="flex items-center justify-center space-x-4 mb-6">
-                <motion.div
-                  initial={{ scale: 0, rotate: -30 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 0.5, duration: 0.5, type: "spring" }}
-                >
-                  <Cpu className="w-8 h-8 text-cyan-400" />
-                </motion.div>
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.7, duration: 0.5, type: "spring" }}
-                >
-                  <Code className="w-8 h-8 text-cyan-400" />
-                </motion.div>
-                <motion.div
-                  initial={{ scale: 0, rotate: 30 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 0.9, duration: 0.5, type: "spring" }}
-                >
-                  <Zap className="w-8 h-8 text-cyan-400" />
-                </motion.div>
+    <motion.section id="about" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="py-16 md:py-24">
+      <div className="mx-auto max-w-6xl">
+        <div className="panel relative overflow-hidden p-8 md:p-12">
+          <div className="pointer-events-none absolute right-0 top-0 h-40 w-40 bg-emerald-400/10 blur-3xl" />
+          <p className="hud-label mb-4">SYS.STATUS — FIELD OPERATIONS // ROS2</p>
+          <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-zinc-50 md:text-7xl">
+            Keval <span className="gradient-text">Visaria</span>
+          </h1>
+          <p className="mt-4 font-display text-xl font-medium text-zinc-100 md:text-2xl">
+            Robotics Field Engineer
+          </p>
+          <p className="mt-3 max-w-3xl text-lg leading-relaxed text-zinc-400">
+            Deploying, validating, and operating autonomous mobile robots in high-availability production
+            environments — currently at Meta (via Beyondsoft) in Temple, TX. Hardware, software, and the
+            messy reality in between.
+          </p>
+
+          <div className="mt-10 grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+            {telemetry.map((item) => (
+              <div key={item.label} className="bg-[#0a100f] p-5">
+                <item.icon className="h-5 w-5 text-emerald-400" />
+                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">{item.label}</p>
+                <p className="mt-1 text-sm font-medium leading-snug text-zinc-100">{item.value}</p>
               </div>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.1, duration: 0.5 }}
-                className="text-lg text-cyan-300 uppercase tracking-widest font-light mb-2"
-              >
-                Hello World
-              </motion.p>
-
-              <motion.h1
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1.3, duration: 0.7 }}
-                className="text-5xl md:text-6xl font-bold mb-4"
-              >
-                I'm <span className="gradient-text">Keval Visaria</span>
-              </motion.h1>
-
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 1.5, duration: 0.7 }}
-                className="h-1 w-24 bg-gradient-to-r from-cyan-400 to-blue-500 mb-6 origin-left"
-              ></motion.div>
-
-              <motion.h2
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.7, duration: 0.7 }}
-                className="text-xl md:text-2xl text-gray-300 font-light"
-              >
-                Robotics Engineer & Embedded Systems Specialist
-              </motion.h2>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.9, duration: 0.7 }}
-                className="mt-4 text-gray-400 max-w-2xl"
-              >
-                Crafting intelligent systems at the intersection of hardware and software
-              </motion.p>
-            </motion.div>
+            ))}
           </div>
-        </motion.div>
+        </div>
 
-        <h2 className="text-4xl font-bold mb-8 gradient-text">About Me</h2>
-        <div className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-gray-700 space-y-6">
-          <p className="text-lg text-gray-300">
-            Robotics isn't just my field of study—it's my passion. I'm Keval Visaria, a robotics engineer who thrives at
-            the intersection of hardware and software, blending precision engineering with intelligent automation.
-            Whether it's embedded systems, PCB design, or control systems, I enjoy bringing ideas to life by fusing
-            electronics, code, and mechanics into seamless, functional technology.
-          </p>
-          <p className="text-lg text-gray-300">
-            From writing efficient C++ and Python code to designing intricate PCB layouts, I love problem-solving and
-            optimizing systems for efficiency and real-world impact. My expertise spans embedded platforms like
-            Raspberry Pi, Jetson Nano, and Arduino, giving me the ability to push boundaries in automation and
-            intelligent control.
-          </p>
-          <p className="text-lg text-gray-300">
-            At heart, I am an innovator and a builder, always seeking to engineer smarter, more intuitive systems.
-            Whether it's developing custom firmware, fine-tuning haptic feedback, or designing seamless integrations
-            between hardware and software, I believe that great technology isn't just about circuits and code—it's about
-            solving problems that matter.
-          </p>
-          <p className="text-lg text-cyan-300 font-semibold">Let's build the future, one innovation at a time. 🚀</p>
+        <div className="mt-16 grid gap-10 lg:grid-cols-[220px_1fr]">
+          <div>
+            <p className="section-index">01 / ABOUT</p>
+            <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl">About me</h2>
+          </div>
+          <div className="space-y-5 text-lg leading-relaxed text-zinc-300">
+            <p>
+              I&apos;m a robotics engineer who works where robots actually have to run: in production, outdoors,
+              around people and machinery, not just in simulation. My current work is field robotics — system
+              setup and validation, structured autonomy testing, sensor profiling, and debugging live robots
+              with logs, ROS bags, and the tools that show what really happened.
+            </p>
+            <p>
+              That field work sits on an embedded foundation: firmware in C and C++, PCB design and bring-up,
+              control systems, and sensor fusion. Whether it&apos;s a humanoid arm, a mobile robot, or a fleet
+              of autonomous units, I enjoy bringing hardware, code, and mechanics together into systems that
+              keep working after deployment.
+            </p>
+            <p className="font-medium text-emerald-300">
+              Build it, test it in the field, fix what breaks, ship it again.
+            </p>
+          </div>
         </div>
       </div>
     </motion.section>
   )
 }
-

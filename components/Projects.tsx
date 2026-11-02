@@ -166,27 +166,27 @@ function ProjectCard({ project }) {
   return (
     <motion.div
       layout
-      className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-gray-700 overflow-hidden"
+      className="panel panel-hover p-6 overflow-hidden"
     >
       <motion.div layout className="flex justify-between items-start">
         <div>
-          <motion.h3 layout className="text-2xl font-semibold text-cyan-300">
+          <motion.h3 layout className="text-2xl font-semibold text-emerald-300">
             {project.title}
           </motion.h3>
         </div>
         <motion.button
           layout
           onClick={() => setIsExpanded(!isExpanded)}
-          className={`p-2 rounded-full hover:bg-gray-700/50 transition-all ${isExpanded ? "rotate-180" : ""}`}
+          className={`p-2 rounded-full hover:bg-white/10 transition-all ${isExpanded ? "rotate-180" : ""}`}
           aria-expanded={isExpanded}
           aria-label={isExpanded ? "Show less" : "Show more"}
         >
-          <ChevronDown className="w-5 h-5 text-cyan-300" />
+          <ChevronDown className="w-5 h-5 text-emerald-300" />
         </motion.button>
       </motion.div>
 
       <motion.div layout className="mt-4">
-        <motion.p layout className="text-gray-300">
+        <motion.p layout className="text-zinc-300">
           {project.summary}
         </motion.p>
       </motion.div>
@@ -200,15 +200,15 @@ function ProjectCard({ project }) {
             transition={{ duration: 0.3 }}
             className="mt-6 space-y-6"
           >
-            <p className="text-gray-300">{project.description}</p>
+            <p className="text-zinc-300">{project.description}</p>
 
             {project.features && project.features.length > 0 && (
               <div>
-                <h4 className="text-lg font-medium text-cyan-300 mb-2">Key Features</h4>
+                <h4 className="text-lg font-medium text-emerald-300 mb-2">Key Features</h4>
                 <ul className="space-y-2">
                   {project.features.map((feature, idx) => (
-                    <li key={idx} className="text-gray-300 flex">
-                      <span className="text-cyan-500 mr-2">•</span>
+                    <li key={idx} className="text-zinc-300 flex">
+                      <span className="text-emerald-500 mr-2">•</span>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -218,11 +218,11 @@ function ProjectCard({ project }) {
 
             {project.insights && project.insights.length > 0 && (
               <div>
-                <h4 className="text-lg font-medium text-cyan-300 mb-2">Technical Insights</h4>
+                <h4 className="text-lg font-medium text-emerald-300 mb-2">Technical Insights</h4>
                 <ul className="space-y-2">
                   {project.insights.map((insight, idx) => (
-                    <li key={idx} className="text-gray-300 flex">
-                      <span className="text-cyan-500 mr-2">•</span>
+                    <li key={idx} className="text-zinc-300 flex">
+                      <span className="text-emerald-500 mr-2">•</span>
                       <span>{insight}</span>
                     </li>
                   ))}
@@ -232,12 +232,12 @@ function ProjectCard({ project }) {
 
             {project.github && (
               <div className="flex items-center">
-                <Github className="w-5 h-5 text-cyan-300 mr-2" />
+                <Github className="w-5 h-5 text-emerald-300 mr-2" />
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-cyan-400 hover:text-cyan-300 transition-colors flex items-center"
+                  className="text-emerald-400 hover:text-emerald-300 transition-colors flex items-center"
                 >
                   View Project Code
                   <ExternalLink className="w-4 h-4 ml-1" />
@@ -251,7 +251,7 @@ function ProjectCard({ project }) {
       <motion.div layout className="mt-4 flex flex-wrap gap-2">
         {project.skills &&
           project.skills.map((skill, idx) => (
-            <motion.span layout key={idx} className="bg-cyan-500/10 text-cyan-300 px-3 py-1 rounded-full text-sm">
+            <motion.span layout key={idx} className="border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-xs text-zinc-300">
               {skill}
             </motion.span>
           ))}
@@ -267,10 +267,11 @@ export default function Projects() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="py-20"
+      className="py-16 md:py-24"
     >
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold mb-8 gradient-text">Projects</h2>
+      <div className="mx-auto max-w-6xl">
+        <p className="section-index">04 / PROJECTS</p>
+        <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl mb-10">Projects</h2>
         <div className="space-y-6">
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} />

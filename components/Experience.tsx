@@ -90,35 +90,38 @@ function ExperienceCard({ experience }) {
   return (
     <motion.div
       layout
-      className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-gray-700 overflow-hidden"
+      className="panel panel-hover p-6 md:p-8 overflow-hidden"
     >
       <motion.div layout className="flex justify-between items-start">
         <div className="flex-1">
-          <motion.h3 layout className="text-2xl font-semibold text-cyan-300">
+          <motion.h3 layout className="text-2xl font-semibold text-emerald-300">
             {experience.position}
           </motion.h3>
-          <motion.h4 layout className="text-xl text-gray-300">
+          <motion.h4 layout className="text-xl text-zinc-300">
             {experience.company}
           </motion.h4>
           {experience.duration && (
-            <motion.p layout className="text-gray-400 mt-1">
+            <motion.p layout className="mt-1 font-mono text-xs tracking-[0.14em] text-zinc-400">
               {experience.duration}
+              {experience.duration.includes("Present") && (
+                <span className="ml-3 border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] text-emerald-300">CURRENT</span>
+              )}
             </motion.p>
           )}
         </div>
         <motion.button
           layout
           onClick={() => setIsExpanded(!isExpanded)}
-          className={`p-2 rounded-full hover:bg-gray-700/50 transition-all ${isExpanded ? "rotate-180" : ""}`}
+          className={`p-2 rounded-full hover:bg-white/10 transition-all ${isExpanded ? "rotate-180" : ""}`}
           aria-expanded={isExpanded}
           aria-label={isExpanded ? "Show less" : "Show more"}
         >
-          <ChevronDown className="w-5 h-5 text-cyan-300" />
+          <ChevronDown className="w-5 h-5 text-emerald-300" />
         </motion.button>
       </motion.div>
 
       <motion.div layout className="mt-4">
-        <motion.p layout className="text-gray-300">
+        <motion.p layout className="text-zinc-300">
           {isExpanded ? experience.description[0] : experience.summary}
         </motion.p>
       </motion.div>
@@ -133,7 +136,7 @@ function ExperienceCard({ experience }) {
             className="mt-4 space-y-4"
           >
             {experience.description.slice(1).map((paragraph, idx) => (
-              <p key={idx} className="text-gray-300">
+              <p key={idx} className="text-zinc-300">
                 {paragraph}
               </p>
             ))}
@@ -143,7 +146,7 @@ function ExperienceCard({ experience }) {
 
       <motion.div layout className="mt-6 flex flex-wrap gap-2">
         {experience.skills.map((skill, idx) => (
-          <motion.span layout key={idx} className="bg-cyan-500/10 text-cyan-300 px-3 py-1 rounded-full text-sm">
+          <motion.span layout key={idx} className="border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-xs text-zinc-300">
             {skill}
           </motion.span>
         ))}
@@ -159,10 +162,11 @@ export default function Experience() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="py-20"
+      className="py-16 md:py-24"
     >
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold mb-8 gradient-text">Experience</h2>
+      <div className="mx-auto max-w-6xl">
+        <p className="section-index">02 / EXPERIENCE</p>
+        <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl mb-10">Experience</h2>
         <div className="space-y-8">
           {experiences.map((experience, index) => (
             <ExperienceCard key={index} experience={experience} />

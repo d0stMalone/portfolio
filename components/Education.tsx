@@ -42,10 +42,11 @@ export default function Education() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="py-20"
+      className="py-16 md:py-24"
     >
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold mb-8 gradient-text">Education</h2>
+      <div className="mx-auto max-w-6xl">
+        <p className="section-index">03 / EDUCATION</p>
+        <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl mb-10">Education</h2>
         <div className="space-y-8">
           {educations.map((edu, index) => (
             <motion.div
@@ -53,17 +54,17 @@ export default function Education() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-gray-700"
+              className="panel panel-hover p-6 md:p-8"
             >
-              <h3 className="text-2xl font-semibold text-cyan-300 mb-2">{edu.school}</h3>
-              <h4 className="text-xl text-gray-300 mb-2">{edu.degree}</h4>
-              {edu.duration && <p className="text-gray-400 mb-4">{edu.duration}</p>}
+              <h3 className="text-2xl font-semibold text-emerald-300 mb-2">{edu.school}</h3>
+              <h4 className="text-xl text-zinc-300 mb-2">{edu.degree}</h4>
+              {edu.duration && <p className="text-zinc-400 mb-4">{edu.duration}</p>}
               <div className="mt-4">
-                <h5 className="text-lg font-medium text-cyan-300 mb-2">Relevant Coursework</h5>
+                <h5 className="text-lg font-medium text-emerald-300 mb-2">Relevant Coursework</h5>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {edu.coursework.map((course, idx) => (
-                    <li key={idx} className="text-gray-300 flex items-center space-x-2">
-                      <span className="text-cyan-500">•</span>
+                    <li key={idx} className="text-zinc-300 flex items-center space-x-2">
+                      <span className="text-emerald-500">•</span>
                       <span>{course}</span>
                     </li>
                   ))}

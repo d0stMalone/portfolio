@@ -1,5 +1,4 @@
 "use client"
-import { useState } from "react"
 import Navbar from "../components/Navbar"
 import About from "../components/About"
 import Experience from "../components/Experience"
@@ -10,14 +9,12 @@ import Footer from "../components/Footer"
 import RoboticGrid from "../components/RoboticGrid"
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState("about")
-
   return (
-    <main className="min-h-screen bg-gray-900 text-white">
+    <main className="min-h-screen bg-[#050807] text-zinc-200">
       <RoboticGrid />
       <div className="relative z-10">
-        <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
-        <div className="container mx-auto px-4 pt-20">
+        <Navbar />
+        <div className="mx-auto max-w-6xl px-4 pt-24 sm:px-6 lg:px-8">
           <About />
           <Experience />
           <Education />
@@ -29,4 +26,3 @@ export default function Home() {
     </main>
   )
 }
-
