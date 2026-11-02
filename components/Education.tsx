@@ -6,7 +6,7 @@ const educations = [
   {
     school: "Northeastern University",
     degree: "Master in Robotics – ECE concentration",
-    duration: "Aug 2023 – Expected Dec 2025",
+    duration: "Sep 2023 – Aug 2025",
     coursework: [
       "Mobile Robotics",
       "Robot Sensing and Navigation",
@@ -20,6 +20,7 @@ const educations = [
   {
     school: "K.J. Somaiya college of Engineering",
     degree: "Bachelor of Technology in Electronics Engineering",
+    duration: "Aug 2019 – Jul 2023",
     coursework: [
       "C Programming",
       "Control System Engineering",

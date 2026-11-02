@@ -5,8 +5,31 @@ import { ChevronDown } from "lucide-react"
 
 const experiences = [
   {
+    company: "Meta (via Beyondsoft)",
+    position: "Robotics Field Engineer",
+    duration: "November 2025 – Present",
+    summary:
+      "Deploy, operate, and validate 10+ autonomous mobile robots in high-availability production environments in Temple, TX, combining structured field testing, sensor validation, and fleet diagnostics.",
+    description: [
+      "At Meta (via Beyondsoft) in Temple, TX, I deploy, operate, and scale fleet robotics systems across high-availability production environments, working with cross-functional engineering, operations, and facilities teams to keep robots production-ready.",
+      "I run structured, release-level field testing for 10+ autonomous mobile robots — sensor profiling and validation for LiDAR, cameras, radar, GPS/GNSS, and IMU, plus edge-case maneuvers, obstacle avoidance, and controller tuning. I also debug autonomy issues in the field using ROS2, Linux CLI, ROS bag analysis, Rviz, and PlotJuggler, and fix minor bugs in the autonomy stack during operations.",
+      "To cut manual work, I author Python and Bash automation for fleet diagnostics and log-data extraction, document test results and failure analyses for engineering feedback, and drive predictive-maintenance and site-optimization work while enforcing LOTO field safety around autonomous machinery.",
+    ],
+    skills: [
+      "ROS2",
+      "Field Testing",
+      "Sensor Validation",
+      "Fleet Operations",
+      "Python",
+      "Bash",
+      "Linux",
+      "LiDAR",
+      "Root-Cause Analysis",
+    ],
+  },
+  {
     company: "Tatum Robotics",
-    position: "Embedded System Engineer Co-op",
+    position: "Embedded Systems Engineer Intern",
     duration: "July 2024 – December 2024",
     summary:
       "Developed and optimized embedded systems for a humanoid robotic arm, focusing on circuit design, firmware development, and automation. Implemented custom I2C drivers and improved system efficiency through hardware and software optimizations.",
@@ -28,6 +51,7 @@ const experiences = [
   {
     company: "The Innovation Story",
     position: "Robotics Intern",
+    duration: "September 2022 – July 2023",
     summary:
       "Led robotics control system development and STEM education initiatives. Enhanced system efficiency by 15% through advanced mathematical models and sensor fusion. Designed and produced PCBs for multiple projects.",
     description: [
@@ -40,7 +64,7 @@ const experiences = [
   {
     company: "Team KJSCE Robocon",
     position: "Electronics Team Lead",
-    duration: "September 2023 – July 2023",
+    duration: "August 2021 – August 2022",
     summary:
       "Led electronics team in ABU Robocon competition, achieving 95% pathfinding accuracy and 30% improved communication efficiency. Designed multi-microcontroller PCBs and implemented advanced sensor systems.",
     description: [
