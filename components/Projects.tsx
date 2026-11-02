@@ -21,7 +21,7 @@ const projects = [
       "Green Screen Effect: Replaced backgrounds dynamically based on color masking.",
     ],
     github: "https://github.com/d0stMalone/Video-Effects",
-    image: "/projects/video-effects-halo.png",
+    image: "projects/video-effects-halo.png",
     imageAlt: "Video Effects project output: face detection with a halo effect",
     skills: ["C++", "OpenCV", "Computer Vision", "Real-time Processing", "Image Manipulation"],
   },
