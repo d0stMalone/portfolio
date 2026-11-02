@@ -12,16 +12,18 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#050807] text-zinc-200">
       <RoboticGrid />
-      <div className="relative z-10">
+      <div className="relative z-10 lg:flex">
         <Navbar />
-        <div className="mx-auto max-w-6xl px-4 pt-24 sm:px-6 lg:px-8">
-          <About />
-          <Experience />
-          <Education />
-          <Projects />
-          <Skills />
+        <div className="min-w-0 flex-1 lg:ml-80">
+          <div className="mx-auto max-w-5xl px-4 pt-24 sm:px-6 lg:px-10 lg:pt-12">
+            <About />
+            <Experience />
+            <Education />
+            <Projects />
+            <Skills />
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     </main>
   )
