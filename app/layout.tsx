@@ -8,7 +8,7 @@ const display = Space_Grotesk({ subsets: ["latin"], variable: "--font-display" }
 
 export const metadata = {
   title: "Keval Visaria",
-  icons: { icon: "favicon.svg" },
+  icons: { icon: "favicon-kv.svg" },
   description:
     "Robotics Field Engineer deploying, validating, and operating autonomous mobile robots. ROS2, sensor validation, field testing, and embedded systems.",
 }
