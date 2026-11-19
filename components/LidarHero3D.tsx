@@ -235,8 +235,8 @@ export default function LidarHero3D({ className = "" }: { className?: string }) 
       const start = performance.now()
 
       const render = (now: number) => {
-        const t = reduce ? 6 : (now - start) / 1000
-        const u = (t / 42) % 1
+        const t = reduce ? 6 : Math.max(0, now - start) / 1000
+        const u = Math.min(Math.max((t / 42) % 1, 0), 0.9999)
         path.getPointAt(u, robot.position)
         path.getTangentAt(u, tmp)
         const yaw = Math.atan2(-tmp.z, tmp.x)
