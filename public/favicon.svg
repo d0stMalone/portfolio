@@ -1,6 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#050807"/>
-  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#34d399" stroke-width="3"/>
-  <text x="32" y="43" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#34d399" text-anchor="middle">KV</text>
-  <circle cx="50" cy="14" r="4" fill="#22d3ee"/>
-</svg>
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#0f1013"/><g fill="none"><path d="M6.5 7V25" stroke="#f4f4f5" stroke-width="3"/><path d="M7.5 18L14.5 7M10.5 13.5L15.2 25" stroke="#f4f4f5" stroke-width="3" stroke-linecap="square"/><path d="M23 24L18 7A18 18 0 0 1 28 7Z" fill="#ff8a3d" fill-opacity=".28"/><path d="M23 24L18 7M23 24L28 7" stroke="#ff8a3d" stroke-width="2.6" stroke-linecap="round"/><circle cx="23" cy="24" r="2.2" fill="#22d3ee"/></g></svg>
