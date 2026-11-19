@@ -5,7 +5,7 @@ export const site = {
   url: "https://kevalvisaria.com",
   github: "https://github.com/d0stMalone",
   linkedin: "https://www.linkedin.com/in/kevalvisaria/",
-  email: "",
+  email: "visariakeval@gmail.com",
   // e.g. "Keval-Visaria-Resume.pdf" placed in /public
   resumeUrl: "",
 }
