@@ -37,18 +37,16 @@ function Ticker() {
     return () => clearInterval(t)
   }, [reduce])
   return (
-    <span className="relative inline-block min-w-[16ch] text-emerald-300">
-      <motion.span
-        key={i}
-        initial={reduce ? false : { opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35 }}
-        className="inline-block"
-      >
-        {nowDoing[i]}
-      </motion.span>
+    <motion.span
+      key={i}
+      initial={reduce ? false : { opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35 }}
+      className="text-emerald-300"
+    >
+      {nowDoing[i]}
       <span className="blink ml-0.5 text-emerald-400">▍</span>
-    </span>
+    </motion.span>
   )
 }
 
@@ -77,7 +75,7 @@ export default function About() {
               I deploy, validate and operate autonomous mobile robots in high-availability production environments —
               currently at Meta (via Beyondsoft) in Temple, TX. Hardware, software, and the messy reality in between.
             </p>
-            <p className="mt-5 font-mono text-sm text-zinc-400">
+            <p className="mt-5 min-h-[2.75rem] font-mono text-sm text-zinc-400 sm:min-h-0">
               <span className="text-zinc-500">$ now:</span> <Ticker />
             </p>
 
@@ -96,7 +94,7 @@ export default function About() {
             </div>
           </div>
 
-          <div className="relative mx-auto aspect-square w-full max-w-[240px] sm:max-w-[300px]">
+          <div className="relative mx-auto aspect-square w-full max-w-[200px] sm:max-w-[300px]">
             <LidarScan className="h-full w-full" />
             <p className="hud-label absolute left-0 top-0">/scan · live</p>
             <div className="absolute bottom-0 right-0 flex gap-3 font-mono text-[10px] text-zinc-500">

@@ -7,14 +7,30 @@ import { ArrowUpRight, Github, Maximize2, X } from "lucide-react"
 import Reveal, { SectionHeading } from "./Reveal"
 import { projects, type Project } from "../lib/projects"
 
-function ProjectImage({ src, alt, light, className = "" }: { src: string; alt: string; light?: boolean; className?: string }) {
+function ProjectImage({
+  src,
+  alt,
+  light,
+  darken,
+  className = "",
+}: {
+  src: string
+  alt: string
+  light?: boolean
+  darken?: boolean
+  className?: string
+}) {
+  // `darken` flips white-background plots into a dark theme for the cards.
+  const flip = light && darken
   return (
-    <div className={`overflow-hidden border border-white/10 ${light ? "bg-white" : "bg-[#0a100f]"} ${className}`}>
+    <div className={`overflow-hidden border border-white/10 ${light && !flip ? "bg-white" : "bg-[#0a100f]"} ${className}`}>
       <img
         src={src}
         alt={alt}
         loading="lazy"
-        className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+        className={`h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.03] ${
+          flip ? "[filter:invert(0.93)_hue-rotate(180deg)_saturate(1.4)]" : ""
+        }`}
       />
     </div>
   )
@@ -120,6 +136,7 @@ function FeaturedCard({ project, index, onOpen }: { project: Project; index: num
                 src={project.image}
                 alt={project.imageAlt || project.title}
                 light={project.imageLight}
+                darken
                 className="aspect-[16/9] border-x-0 border-t-0"
               />
               <span className="absolute right-3 top-3 flex items-center gap-1 bg-black/70 px-2 py-1 font-mono text-[10px] tracking-[0.15em] text-emerald-300 opacity-0 transition-opacity group-hover:opacity-100">
