@@ -1,290 +1,273 @@
 "use client"
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown, Github, ExternalLink } from "lucide-react"
 
-const projects = [
-  {
-    title: "Real-Time Video Effects Using OpenCV",
-    summary:
-      "Advanced real-time video processing project using OpenCV in C++ with interactive controls and custom visual effects.",
-    description:
-      "As part of my coursework at Northeastern University, developed an advanced real-time video processing project using OpenCV in C++. This project explores various image manipulation techniques, from fundamental grayscale conversion to creative visual effects, optimizing both performance and functionality.",
-    features: [
-      "Live Video Processing: Implemented a real-time video display system with user-interactive controls.",
-      "Advanced Filters & Transformations: Applied grayscale, sepia tone, blurring, and edge detection (Sobel filters).",
-      "Selective Colorization: Highlighted the most dominant colors while turning the rest grayscale.",
-      "Dynamic Face Effects: Added effects like a halo of sparkles above detected faces.",
-      "Embossing & Contrast Control: Enhanced images using Sobel-based embossing and real-time contrast adjustments.",
-      "Performance Optimization: Developed a faster blur algorithm using separable filters for improved efficiency.",
-      "Meme Generator: Allowed users to add captions to frames, creating instant memes.",
-      "Green Screen Effect: Replaced backgrounds dynamically based on color masking.",
-    ],
-    github: "https://github.com/d0stMalone/Video-Effects",
-    image: "projects/video-effects-halo.png",
-    imageAlt: "Video Effects project output: face detection with a halo effect",
-    skills: ["C++", "OpenCV", "Computer Vision", "Real-time Processing", "Image Manipulation"],
-  },
-  {
-    title: "Content-Based Image Retrieval Using Computer Vision & Deep Learning",
-    summary:
-      "Developed a system that analyzes, matches, and retrieves similar images based on content using both classical techniques and deep learning.",
-    description:
-      "In this project, I explored pattern recognition and content-based image retrieval (CBIR) by combining classical image processing techniques with deep learning-based feature extraction. The goal was to develop a system that can analyze, match, and retrieve similar images from a database based on their content, rather than relying on metadata or filenames.",
-    features: [
-      "Baseline Image Matching: Simple pixel-level matching using sum-of-squared differences.",
-      "Histogram-Based Matching: Leveraging HSV color histograms for more robust comparisons.",
-      "Multi-Histogram Approach: Combining global and local features for better accuracy.",
-      "Texture & Edge Detection: Using Sobel filters, Laws filters, Gabor filters, and Fourier Transforms to extract texture-based features.",
-      "Deep Learning (DNN Embeddings): Implemented ResNet18 to generate high-dimensional feature vectors and compare images using Euclidean and Cosine distances.",
-      "Hybrid Approach: Combined deep features with classical feature extraction (e.g., Sobel gradients) for improved image similarity matching.",
-      "Face Detection & Content-Based Search: Incorporated OpenCV's Haar cascade to enhance face-based image retrieval.",
-      "Custom Image Similarity Metric: Designed a novel approach by combining DNN embeddings, color histograms, and edge-based features for more accurate matching.",
-    ],
-    insights: [
-      "Classical vs. Deep Learning Approaches: Comparing traditional histogram-based techniques with modern CNN-based feature extraction.",
-      "Optimizing Distance Metrics: Analyzed how sum-square distances and cosine similarity impact retrieval accuracy.",
-      "Feature Fusion: Successfully integrated handcrafted features with DNN embeddings to improve retrieval robustness.",
-    ],
-    github: "https://github.com/d0stMalone/Content-based-Image-Retrieval",
-    skills: ["Computer Vision", "Deep Learning", "Python", "PyTorch", "ResNet", "Feature Extraction"],
-  },
-  {
-    title: "Real-Time 2D Object Recognition using Computer Vision & Deep Learning",
-    summary:
-      "Built a real-time object recognition system that identifies, classifies, and learns new objects dynamically using computer vision and machine learning.",
-    description:
-      "In this project, I built a real-time object recognition system that enables computers to identify, classify, and even learn new objects dynamically. The system combines classical image processing, machine learning, and deep learning to achieve accurate and adaptable recognition, making it suitable for robotics, automation, and AI applications.",
-    features: [
-      "Real-Time Object Segmentation: Extracts objects from a live video stream using thresholding and morphological filtering.",
-      "Feature-Based Recognition: Uses Hu Moments, Aspect Ratio, and Centroid Detection to classify objects based on shape and spatial properties.",
-      "Machine Learning Classification: Implements K-Nearest Neighbours (KNN) and scaled Euclidean distance for object matching.",
-      "Deep Learning Integration: Employs a pre-trained neural network (DNN) for enhanced feature extraction and classification.",
-      "Adaptive Learning: The system can learn and classify new objects on the fly, updating its knowledge base dynamically.",
-      "Performance Evaluation: Assesses accuracy using a confusion matrix and multiple test cases.",
-    ],
-    github: "https://github.com/d0stMalone/Real-Time-2-D-Object-Detection",
-    skills: [
-      "Computer Vision",
-      "Machine Learning",
-      "Deep Learning",
-      "Object Recognition",
-      "KNN",
-      "Real-time Processing",
-    ],
-  },
-  {
-    title: "Calibration and Augmented Reality",
-    summary:
-      "Built an augmented reality system that overlays virtual objects onto real-world environments in real-time using computer vision techniques.",
-    description:
-      "In this project, I explored the fascinating realm of augmented reality (AR) and camera calibration, building a system that seamlessly overlays virtual objects onto real-world environments in real-time. By leveraging computer vision techniques and OpenCV, I enabled accurate detection of key features and precise spatial mapping.",
-    features: [
-      "Camera Calibration & Feature Detection: Used chessboard-based calibration to accurately translate 3D real-world points into 2D image points, ensuring seamless AR overlays.",
-      "Real-Time Camera Position Tracking: Implemented algorithms to dynamically track the camera's movement and adjust virtual objects accordingly.",
-      "3D Object Projection & Augmented Reality: Brought virtual objects to life by projecting 3D axes and interactive digital elements onto live video feeds.",
-      "Robust Feature Recognition: Used Speeded-Up Robust Features (SURF) to detect objects beyond predefined patterns, making AR applications more adaptable.",
-      "Multi-Target & Camera Adaptability: Extended the system to recognize multiple targets simultaneously and tested across different camera setups for accuracy.",
-    ],
-    github: "https://github.com/d0stMalone/Calibration-and-Augmented-Reality",
-    skills: ["Augmented Reality", "Computer Vision", "OpenCV", "Camera Calibration", "3D Projection", "SURF"],
-  },
-  {
-    title: "Recognition using Deep Learning",
-    summary:
-      "Developed a CNN using PyTorch to recognize handwritten digits and Greek letters with real-time video recognition capabilities.",
-    description:
-      "In this project, I developed and trained a Convolutional Neural Network (CNN) using PyTorch to recognize handwritten digits from the MNIST dataset and later adapted it to classify Greek letters through transfer learning.",
-    features: [
-      "Neural Network for Handwritten Digit Recognition: Built a CNN with multiple convolutional and pooling layers to classify handwritten digits with high accuracy.",
-      "Dropout Layers: Implemented dropout layers to reduce overfitting and improve generalization.",
-      "Transfer Learning for Greek Letters: Modified the trained CNN to recognize alpha, beta, gamma, and later extended it to more Greek letters.",
-      "Real-Time Digit Recognition: Integrated the trained model with OpenCV for live video digit detection using a webcam.",
-      "Dynamic Processing: Processed video frames in real-time, isolating and recognizing handwritten numbers dynamically.",
-      "Architecture Experimentation: Explored different CNN architectures by varying layers, filters, and dropout rates to achieve optimal performance.",
-      "Gabor Filter Integration: Integrated Gabor filters in the first CNN layer to enhance feature extraction for digit recognition.",
-    ],
-    github: "https://github.com/d0stMalone/Recognition-using-Deep-Network",
-    skills: ["Deep Learning", "PyTorch", "CNN", "Transfer Learning", "OpenCV", "Real-time Recognition"],
-  },
-  {
-    title: "Autonomous Lane Detection using Computer Vision",
-    summary:
-      "Developed a computer vision-based lane detection system for autonomous vehicles using edge detection, color transformations, and deep learning.",
-    description:
-      "In this project, I developed a computer vision-based lane detection system using OpenCV, aimed at assisting autonomous vehicles in identifying road lanes under various conditions. This system utilizes edge detection, color space transformations, and polynomial fitting to accurately track lane markings in real time.",
-    features: [
-      "Traditional Image Processing: Used Canny Edge Detection and Hough Transform to identify lane markings.",
-      "Noise Reduction: Applied Gaussian Blur for noise reduction and enhanced accuracy.",
-      "Advanced Color Space Analysis: Explored the effectiveness of RGB, HSV, and HSL color spaces for robust lane detection.",
-      "Adaptive Filtering: Implemented adaptive filtering to handle different lighting and weather conditions.",
-      "Sliding Window Technique: Used a sliding window technique to track lane boundaries dynamically.",
-      "Polynomial Curve Fitting: Applied second-order polynomial curve fitting to maintain lane continuity.",
-      "Lane Curvature Estimation: Computed lane curvature and vehicle offset to improve autonomous navigation.",
-      "Perspective Transformation: Integrated perspective transformation for accurate road mapping.",
-      "Deep Learning Integration: Experimented with U-Net (CNN Architecture) to segment lane lines from road images.",
-      "Dataset Training: Used TuSimple dataset to train the model for improved detection in complex environments.",
-    ],
-    github: "https://github.com/d0stMalone/Lane-Detection",
-    skills: ["Computer Vision", "OpenCV", "Deep Learning", "U-Net", "Autonomous Vehicles", "Image Processing"],
-  },
-  {
-    title: "Precision-Controlled Articulated Robotic Arm",
-    summary:
-      "Designed and built a 3-DOF robotic arm with inverse kinematics for precision positioning and optimized motion control.",
-    description:
-      "This project involved the design, construction, and programming of a 3-DOF articulated robotic arm, engineered for enhanced efficiency and precision in real-world applications. By implementing advanced motion control algorithms and optimizing software performance, I improved the system's responsiveness and accuracy.",
-    features: [
-      "Robotic Arm Construction: Designed and built a 3-degree-of-freedom (3-DOF) robotic arm for controlled and precise movement.",
-      "Servo Motor Control: Implemented servo motors with optimized control loops to achieve smooth motion.",
-      "Inverse Kinematics: Programmed the arm using inverse kinematics algorithms, allowing it to reach target positions with high accuracy.",
-      "Trajectory Planning: Integrated trajectory planning for seamless and natural movement.",
-      "Performance Optimization: Optimized the software to enhance speed and response time, ensuring efficient operation.",
-      "Efficiency Improvement: Achieved a 20% increase in operational efficiency through precise motor control and reduced error margins.",
-      "Industrial Applications: The arm can be utilized in pick-and-place operations, assembly lines, and automation systems.",
-      "Integration Potential: Designed for potential integration with computer vision systems for enhanced functionality.",
-    ],
-    skills: ["Robotics", "Inverse Kinematics", "Servo Motors", "Motion Control", "3D Printing", "Embedded Systems"],
-  },
-  {
-    title: "Pneumatic-Driven Quadruped Robot",
-    summary:
-      "Designed a 4-legged robot with pneumatic actuation, custom PCB, and wireless control for navigating complex terrains.",
-    description:
-      "This project focused on designing and developing a 4-legged quadruped robot, leveraging pneumatic actuation for smooth and efficient limb movement. By integrating custom electronics, wireless control, and advanced maneuverability, this robot is designed to navigate challenging terrains, making it useful for exploration and industrial applications.",
-    features: [
-      "Pneumatic Actuation: Integrated pneumatic-driven limb movement for precise and adaptive walking control.",
-      "Custom Air Control System: Designed a custom air control system to optimize stride efficiency on varied surfaces.",
-      "Custom PCB Design: Designed and fabricated a master PCB board incorporating Arduino UNO for efficient limb actuation.",
-      "Wireless Connectivity: Implemented Bluetooth/ZigBee connectivity for wireless remote control, ensuring reliable and real-time communication.",
-    ],
-    skills: ["Robotics", "Pneumatics", "PCB Design", "Arduino", "Bluetooth", "ZigBee", "Mechanical Design"],
-  },
-]
+import { useMemo, useState } from "react"
+import * as Dialog from "@radix-ui/react-dialog"
+import { AnimatePresence, motion } from "framer-motion"
+import { ArrowUpRight, Github, Maximize2, X } from "lucide-react"
+import Reveal, { SectionHeading } from "./Reveal"
+import { projects, type Project } from "../lib/projects"
 
-function ProjectCard({ project }) {
-  const [isExpanded, setIsExpanded] = useState(false)
-
+function ProjectImage({ src, alt, light, className = "" }: { src: string; alt: string; light?: boolean; className?: string }) {
   return (
-    <motion.div
-      layout
-      className="panel panel-hover p-6 overflow-hidden"
-    >
-      <motion.div layout className="flex justify-between items-start">
-        <div>
-          <motion.h3 layout className="text-2xl font-semibold text-emerald-300">
-            {project.title}
-          </motion.h3>
-        </div>
-        <motion.button
-          layout
-          onClick={() => setIsExpanded(!isExpanded)}
-          className={`p-2 rounded-full hover:bg-white/10 transition-all ${isExpanded ? "rotate-180" : ""}`}
-          aria-expanded={isExpanded}
-          aria-label={isExpanded ? "Show less" : "Show more"}
-        >
-          <ChevronDown className="w-5 h-5 text-emerald-300" />
-        </motion.button>
-      </motion.div>
+    <div className={`overflow-hidden border border-white/10 ${light ? "bg-white" : "bg-[#0a100f]"} ${className}`}>
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+      />
+    </div>
+  )
+}
 
-      {project.image && (
-        <img src={project.image} alt={project.imageAlt || project.title} className="mt-4 max-h-80 w-full border border-white/10 object-cover" />
-      )}
-
-      <motion.div layout className="mt-4">
-        <motion.p layout className="text-zinc-300">
-          {project.summary}
-        </motion.p>
-      </motion.div>
-
+function ProjectDialog({ project, onClose }: { project: Project | null; onClose: () => void }) {
+  return (
+    <Dialog.Root open={!!project} onOpenChange={(o) => !o && onClose()}>
       <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-6 space-y-6"
-          >
-            <p className="text-zinc-300">{project.description}</p>
-
-            {project.features && project.features.length > 0 && (
-              <div>
-                <h4 className="text-lg font-medium text-emerald-300 mb-2">Key Features</h4>
-                <ul className="space-y-2">
-                  {project.features.map((feature, idx) => (
-                    <li key={idx} className="text-zinc-300 flex">
-                      <span className="text-emerald-500 mr-2">•</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {project.insights && project.insights.length > 0 && (
-              <div>
-                <h4 className="text-lg font-medium text-emerald-300 mb-2">Technical Insights</h4>
-                <ul className="space-y-2">
-                  {project.insights.map((insight, idx) => (
-                    <li key={idx} className="text-zinc-300 flex">
-                      <span className="text-emerald-500 mr-2">•</span>
-                      <span>{insight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {project.github && (
-              <div className="flex items-center">
-                <Github className="w-5 h-5 text-emerald-300 mr-2" />
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-emerald-400 hover:text-emerald-300 transition-colors flex items-center"
+        {project && (
+          <Dialog.Portal forceMount>
+            <Dialog.Overlay asChild forceMount>
+              <motion.div
+                className="fixed inset-0 z-[70] bg-black/75 backdrop-blur-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              />
+            </Dialog.Overlay>
+            <Dialog.Content asChild forceMount>
+              <motion.div
+                className="fixed inset-x-3 bottom-3 top-16 z-[80] mx-auto max-w-3xl overflow-y-auto border border-white/15 bg-[#080d0c] p-6 shadow-2xl focus:outline-none sm:inset-x-6 sm:top-[8vh] sm:bottom-[8vh] md:p-10"
+                initial={{ opacity: 0, y: 30, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.98 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Dialog.Close
+                  className="absolute right-4 top-4 p-2 text-zinc-400 transition-colors hover:text-emerald-300"
+                  aria-label="Close"
                 >
-                  View Project Code
-                  <ExternalLink className="w-4 h-4 ml-1" />
-                </a>
-              </div>
-            )}
-          </motion.div>
+                  <X className="h-5 w-5" />
+                </Dialog.Close>
+                <p className="hud-label">{project.category}</p>
+                <Dialog.Title className="mt-2 pr-8 font-display text-2xl font-bold tracking-tight text-zinc-50 md:text-3xl">
+                  {project.title}
+                </Dialog.Title>
+                <Dialog.Description className="mt-3 text-zinc-300">{project.description}</Dialog.Description>
+
+                {project.image && (
+                  <div className="mt-6 grid gap-3">
+                    <ProjectImage src={project.image} alt={project.imageAlt || project.title} light={project.imageLight} className="max-h-[420px]" />
+                    {project.gallery?.map((g) => (
+                      <ProjectImage key={g.src} src={g.src} alt={g.alt} light={g.light} className="max-h-[420px]" />
+                    ))}
+                  </div>
+                )}
+
+                <h4 className="mt-8 font-display text-lg font-semibold text-emerald-300">What I built</h4>
+                <ul className="mt-3 space-y-2">
+                  {project.features.map((f) => (
+                    <li key={f} className="flex gap-3 text-zinc-300">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-emerald-400" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {project.insights && project.insights.length > 0 && (
+                  <>
+                    <h4 className="mt-8 font-display text-lg font-semibold text-emerald-300">What I learned</h4>
+                    <ul className="mt-3 space-y-2">
+                      {project.insights.map((f) => (
+                        <li key={f} className="flex gap-3 text-zinc-300">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-cyan-400" />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {project.skills.map((s) => (
+                    <span key={s} className="chip">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+
+                {project.github && (
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-primary mt-8">
+                    <Github className="h-4 w-4" /> View code on GitHub <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                )}
+              </motion.div>
+            </Dialog.Content>
+          </Dialog.Portal>
         )}
       </AnimatePresence>
-
-      <motion.div layout className="mt-4 flex flex-wrap gap-2">
-        {project.skills &&
-          project.skills.map((skill, idx) => (
-            <motion.span layout key={idx} className="border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-xs text-zinc-300">
-              {skill}
-            </motion.span>
-          ))}
-      </motion.div>
-    </motion.div>
+    </Dialog.Root>
   )
 }
+
+function FeaturedCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
+  return (
+    <Reveal delay={(index % 2) * 0.08} className="h-full">
+      <article className="panel spotlight group flex h-full flex-col transition-colors duration-300 hover:border-emerald-400/40">
+        <button onClick={onOpen} className="block text-left" aria-label={`Open details for ${project.title}`}>
+          {project.image && (
+            <div className="relative">
+              <ProjectImage
+                src={project.image}
+                alt={project.imageAlt || project.title}
+                light={project.imageLight}
+                className="aspect-[16/9] border-x-0 border-t-0"
+              />
+              <span className="absolute right-3 top-3 flex items-center gap-1 bg-black/70 px-2 py-1 font-mono text-[10px] tracking-[0.15em] text-emerald-300 opacity-0 transition-opacity group-hover:opacity-100">
+                <Maximize2 className="h-3 w-3" /> DETAILS
+              </span>
+            </div>
+          )}
+        </button>
+        <div className="flex flex-1 flex-col p-6">
+          <p className="font-mono text-[10px] tracking-[0.2em] text-zinc-500">0{index + 1} · FEATURED</p>
+          <h3 className="mt-2 font-display text-xl font-semibold leading-snug text-zinc-50 transition-colors group-hover:text-emerald-300">
+            <button onClick={onOpen} className="text-left">
+              {project.title}
+            </button>
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-zinc-400">{project.summary}</p>
+          {project.highlight && (
+            <p className="mt-4 border-l-2 border-emerald-400/70 pl-3 text-sm font-medium text-emerald-200">{project.highlight}</p>
+          )}
+          <div className="mt-5 flex flex-wrap gap-2">
+            {project.skills.slice(0, 5).map((s) => (
+              <span key={s} className="chip">
+                {s}
+              </span>
+            ))}
+          </div>
+          <div className="mt-auto flex items-center gap-5 pt-6 text-sm">
+            <button onClick={onOpen} className="font-medium text-emerald-300 transition-colors hover:text-emerald-200">
+              Read more →
+            </button>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-zinc-400 transition-colors hover:text-emerald-300"
+              >
+                <Github className="h-4 w-4" /> Code
+              </a>
+            )}
+          </div>
+        </div>
+      </article>
+    </Reveal>
+  )
+}
+
+function CompactCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
+  return (
+    <motion.article
+      layout
+      initial={{ opacity: 0, scale: 0.97 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.97 }}
+      transition={{ duration: 0.25 }}
+      className="panel spotlight group flex flex-col p-5 transition-colors duration-300 hover:border-emerald-400/40"
+    >
+      <p className="font-mono text-[10px] tracking-[0.2em] text-zinc-500">{project.category.toUpperCase()}</p>
+      <h3 className="mt-2 font-display text-lg font-semibold leading-snug text-zinc-100 transition-colors group-hover:text-emerald-300">
+        <button onClick={onOpen} className="text-left">
+          {project.title}
+        </button>
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-zinc-400">{project.summary}</p>
+      <div className="mt-4 flex flex-wrap gap-1.5">
+        {project.skills.slice(0, 3).map((s) => (
+          <span key={s} className="chip">
+            {s}
+          </span>
+        ))}
+      </div>
+      <div className="mt-auto flex items-center gap-5 pt-5 text-sm">
+        <button onClick={onOpen} className="font-medium text-emerald-300 transition-colors hover:text-emerald-200">
+          Details →
+        </button>
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-zinc-400 transition-colors hover:text-emerald-300"
+          >
+            <Github className="h-4 w-4" /> Code
+          </a>
+        )}
+      </div>
+    </motion.article>
+  )
+}
+
+const filters = ["All", "Perception", "Hardware"] as const
 
 export default function Projects() {
+  const [open, setOpen] = useState<Project | null>(null)
+  const [filter, setFilter] = useState<(typeof filters)[number]>("All")
+
+  const featured = projects.filter((p) => p.featured)
+  const more = useMemo(
+    () => projects.filter((p) => !p.featured && (filter === "All" || p.category === filter)),
+    [filter],
+  )
+
   return (
-    <motion.section
-      id="projects"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="py-16 md:py-24"
-    >
-      <div className="mx-auto max-w-6xl">
-        <p className="section-index">04 / PROJECTS</p>
-        <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl mb-10">Projects</h2>
-        <div className="space-y-6">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} />
+    <section id="projects" className="py-16 md:py-24">
+      <SectionHeading
+        index="03"
+        label="PROJECTS"
+        title="Projects"
+        intro="Robotics work first — sensing, navigation and learning-based control — followed by hardware builds and computer vision."
+      />
+
+      <div className="mt-10 grid gap-6 md:grid-cols-2">
+        {featured.map((p, i) => (
+          <FeaturedCard key={p.slug} project={p} index={i} onOpen={() => setOpen(p)} />
+        ))}
+      </div>
+
+      <Reveal className="mt-16 flex flex-wrap items-end justify-between gap-4">
+        <h3 className="font-display text-2xl font-semibold text-zinc-100">More projects</h3>
+        <div className="flex gap-1 border border-white/10 p-1" role="tablist" aria-label="Filter projects">
+          {filters.map((f) => (
+            <button
+              key={f}
+              role="tab"
+              aria-selected={filter === f}
+              onClick={() => setFilter(f)}
+              className={`relative px-3 py-1.5 font-mono text-xs transition-colors ${
+                filter === f ? "text-[#04110c]" : "text-zinc-400 hover:text-emerald-300"
+              }`}
+            >
+              {filter === f && (
+                <motion.span layoutId="filter-pill" className="absolute inset-0 bg-emerald-400" transition={{ duration: 0.25 }} />
+              )}
+              <span className="relative">{f}</span>
+            </button>
           ))}
         </div>
-      </div>
-    </motion.section>
+      </Reveal>
+
+      <motion.div layout className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <AnimatePresence mode="popLayout">
+          {more.map((p) => (
+            <CompactCard key={p.slug} project={p} onOpen={() => setOpen(p)} />
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      <ProjectDialog project={open} onClose={() => setOpen(null)} />
+    </section>
   )
 }
-

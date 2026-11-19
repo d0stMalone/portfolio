@@ -1,56 +1,61 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { Cpu, Radar, Terminal, Waypoints } from "lucide-react"
+import Reveal, { SectionHeading } from "./Reveal"
 
 const skillCategories = [
   {
     name: "Field & Autonomy",
+    icon: Waypoints,
     skills: ["ROS2", "Field Testing", "Sensor Validation", "Release Testing", "Fleet Operations", "Root-Cause Analysis", "Rviz", "PlotJuggler", "ROS Bag Analysis", "Path Planning", "Motion Control"],
   },
   {
     name: "Sensing & Perception",
-    skills: ["LiDAR", "Cameras", "Radar", "GPS/GNSS", "IMU", "Sensor Fusion", "OpenCV", "PyTorch", "TensorFlow", "Deep Learning", "Machine Learning", "Image Processing"],
+    icon: Radar,
+    skills: ["LiDAR", "Cameras", "Radar", "GPS/GNSS", "IMU", "Sensor Fusion", "OpenCV", "PyTorch", "TensorFlow", "Deep Learning", "Reinforcement Learning", "Image Processing"],
   },
   {
     name: "Embedded & Hardware",
+    icon: Cpu,
     skills: ["Embedded C", "C++", "STM32", "Jetson Nano", "Raspberry Pi", "Arduino", "Microcontrollers", "PCB Design", "4-Layer PCB", "PCBA Bring-up", "Motor Controllers", "Circuit Design"],
   },
   {
     name: "Software & Tools",
+    icon: Terminal,
     skills: ["Python", "Bash", "Linux", "Git", "CI/CD", "Docker", "JTAG", "GDB", "JIRA", "MATLAB", "Java", "SOLIDWORKS", "AutoCAD", "3D Printing"],
   },
 ]
 
 export default function Skills() {
   return (
-    <motion.section id="skills" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="py-16 md:py-24">
-      <div className="mx-auto max-w-6xl">
-        <p className="section-index">05 / STACK</p>
-        <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl">Skills</h2>
-        <p className="mt-3 max-w-2xl text-zinc-400">
-          The stack I actually use in the field — not just the stack I studied.
-        </p>
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={categoryIndex}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.08 }}
-              className="panel panel-hover p-6"
-            >
-              <h3 className="font-display text-lg font-semibold text-emerald-300">{category.name}</h3>
-              <div className="mt-4 flex flex-wrap gap-2">
+    <section id="skills" className="py-16 md:py-24">
+      <SectionHeading
+        index="05"
+        label="STACK"
+        title="Skills"
+        intro="The stack I actually use in the field — not just the stack I studied."
+      />
+      <div className="mt-10 grid gap-5 md:grid-cols-2">
+        {skillCategories.map((category, i) => (
+          <Reveal key={category.name} delay={(i % 2) * 0.08} className="h-full">
+            <div className="panel spotlight h-full p-6 transition-colors duration-300 hover:border-emerald-400/40">
+              <div className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center border border-emerald-400/30 bg-emerald-400/10">
+                  <category.icon className="h-4 w-4 text-emerald-300" />
+                </span>
+                <h3 className="font-display text-lg font-semibold text-zinc-100">{category.name}</h3>
+              </div>
+              <div className="mt-5 flex flex-wrap gap-2">
                 {category.skills.map((skill) => (
-                  <span key={skill} className="border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-xs text-zinc-300">
+                  <span key={skill} className="chip">
                     {skill}
                   </span>
                 ))}
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </Reveal>
+        ))}
       </div>
-    </motion.section>
+    </section>
   )
 }

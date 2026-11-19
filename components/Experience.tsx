@@ -2,11 +2,13 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown } from "lucide-react"
+import Reveal, { SectionHeading } from "./Reveal"
 
 const experiences = [
   {
     company: "Meta (via Beyondsoft)",
     position: "Robotics Field Engineer",
+    highlights: ["Release-level field testing for a fleet of 10+ autonomous mobile robots", "Sensor profiling & validation: LiDAR, cameras, radar, GPS/GNSS, IMU", "Python & Bash automation for fleet diagnostics and log extraction"],
     duration: "November 2025 – Present",
     summary:
       "Deploy, operate, and validate 10+ autonomous mobile robots in high-availability production environments in Temple, TX, combining structured field testing, sensor validation, and fleet diagnostics.",
@@ -30,6 +32,7 @@ const experiences = [
   {
     company: "Tatum Robotics",
     position: "Embedded Systems Engineer Intern",
+    highlights: ["Custom I2C drivers for haptic motor feedback on a humanoid arm", "systemd services & timers that cut driver bring-up time", "Circuit and PCB design for the arm's power management"],
     duration: "July 2024 – December 2024",
     summary:
       "Developed and optimized embedded systems for a humanoid robotic arm, focusing on circuit design, firmware development, and automation. Implemented custom I2C drivers and improved system efficiency through hardware and software optimizations.",
@@ -51,6 +54,7 @@ const experiences = [
   {
     company: "The Innovation Story",
     position: "Robotics Intern",
+    highlights: ["15% control-system efficiency gain using sensor fusion", "Designed PCBs for 10+ robotics projects", "Mentored high-school FTC & FRC robotics teams"],
     duration: "September 2022 – July 2023",
     summary:
       "Led robotics control system development and STEM education initiatives. Enhanced system efficiency by 15% through advanced mathematical models and sensor fusion. Designed and produced PCBs for multiple projects.",
@@ -64,6 +68,7 @@ const experiences = [
   {
     company: "Team KJSCE Robocon",
     position: "Electronics Team Lead",
+    highlights: ["95% pathfinding accuracy with IMU, encoder & IR sensing", "30% more efficient ZigBee/Bluetooth data link", "Multi-microcontroller PCBs talking UART, I2C, SPI & CAN"],
     duration: "August 2021 – August 2022",
     summary:
       "Led electronics team in ABU Robocon competition, achieving 95% pathfinding accuracy and 30% improved communication efficiency. Designed multi-microcontroller PCBs and implemented advanced sensor systems.",
@@ -84,96 +89,104 @@ const experiences = [
   },
 ]
 
-function ExperienceCard({ experience }) {
+type Exp = (typeof experiences)[number]
+
+function ExperienceCard({ experience, index }: { experience: Exp; index: number }) {
   const [isExpanded, setIsExpanded] = useState(false)
+  const current = experience.duration.includes("Present")
 
   return (
-    <motion.div
-      layout
-      className="panel panel-hover p-6 md:p-8 overflow-hidden"
-    >
-      <motion.div layout className="flex justify-between items-start">
-        <div className="flex-1">
-          <motion.h3 layout className="text-2xl font-semibold text-emerald-300">
-            {experience.position}
-          </motion.h3>
-          <motion.h4 layout className="text-xl text-zinc-300">
-            {experience.company}
-          </motion.h4>
-          {experience.duration && (
-            <motion.p layout className="mt-1 font-mono text-xs tracking-[0.14em] text-zinc-400">
+    <Reveal delay={0.05} className="relative pl-8 md:pl-12">
+      {/* timeline node */}
+      <span
+        className={`absolute left-0 top-7 flex h-[15px] w-[15px] -translate-x-1/2 items-center justify-center border ${
+          current ? "border-emerald-400 bg-emerald-400/20" : "border-white/25 bg-[#050807]"
+        }`}
+      >
+        <span className={`h-[5px] w-[5px] ${current ? "pulse-dot bg-emerald-400" : "bg-zinc-500"}`} />
+      </span>
+
+      <article className="panel spotlight p-6 transition-colors duration-300 hover:border-emerald-400/40 md:p-8">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p className="font-mono text-xs tracking-[0.14em] text-zinc-500">
               {experience.duration}
-              {experience.duration.includes("Present") && (
-                <span className="ml-3 border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] text-emerald-300">CURRENT</span>
+              {current && (
+                <span className="ml-3 border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 text-[10px] text-emerald-300">
+                  CURRENT
+                </span>
               )}
-            </motion.p>
-          )}
+            </p>
+            <h3 className="mt-2 font-display text-xl font-semibold text-zinc-50 md:text-2xl">{experience.position}</h3>
+            <p className="text-base text-emerald-300">{experience.company}</p>
+          </div>
+          <span className="hidden font-mono text-4xl font-bold text-white/[0.06] md:block">0{index + 1}</span>
         </div>
-        <motion.button
-          layout
-          onClick={() => setIsExpanded(!isExpanded)}
-          className={`p-2 rounded-full hover:bg-white/10 transition-all ${isExpanded ? "rotate-180" : ""}`}
-          aria-expanded={isExpanded}
-          aria-label={isExpanded ? "Show less" : "Show more"}
-        >
-          <ChevronDown className="w-5 h-5 text-emerald-300" />
-        </motion.button>
-      </motion.div>
 
-      <motion.div layout className="mt-4">
-        <motion.p layout className="text-zinc-300">
-          {isExpanded ? experience.description[0] : experience.summary}
-        </motion.p>
-      </motion.div>
+        <ul className="mt-5 grid gap-2.5">
+          {experience.highlights.map((h) => (
+            <li key={h} className="flex gap-3 text-zinc-200">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-emerald-400" />
+              <span>{h}</span>
+            </li>
+          ))}
+        </ul>
 
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-4 space-y-4"
-          >
-            {experience.description.slice(1).map((paragraph, idx) => (
-              <p key={idx} className="text-zinc-300">
-                {paragraph}
-              </p>
+        <AnimatePresence initial={false}>
+          {isExpanded && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="mt-5 space-y-4 border-t border-white/10 pt-5 text-zinc-400">
+                {experience.description.map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap gap-2">
+            {experience.skills.slice(0, isExpanded ? undefined : 5).map((skill) => (
+              <span key={skill} className="chip">
+                {skill}
+              </span>
             ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <motion.div layout className="mt-6 flex flex-wrap gap-2">
-        {experience.skills.map((skill, idx) => (
-          <motion.span layout key={idx} className="border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-xs text-zinc-300">
-            {skill}
-          </motion.span>
-        ))}
-      </motion.div>
-    </motion.div>
+            {!isExpanded && experience.skills.length > 5 && (
+              <span className="chip text-zinc-500">+{experience.skills.length - 5}</span>
+            )}
+          </div>
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="flex items-center gap-1 text-sm font-medium text-emerald-300 transition-colors hover:text-emerald-200"
+            aria-expanded={isExpanded}
+          >
+            {isExpanded ? "Show less" : "Full story"}
+            <ChevronDown className={`h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
+          </button>
+        </div>
+      </article>
+    </Reveal>
   )
 }
 
 export default function Experience() {
   return (
-    <motion.section
-      id="experience"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="py-16 md:py-24"
-    >
-      <div className="mx-auto max-w-6xl">
-        <p className="section-index">02 / EXPERIENCE</p>
-        <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl mb-10">Experience</h2>
+    <section id="experience" className="py-16 md:py-24">
+      <SectionHeading index="02" label="EXPERIENCE" title="Experience" />
+      <div className="relative mt-10">
+        <div className="absolute bottom-4 left-0 top-4 w-px bg-gradient-to-b from-emerald-400/70 via-white/15 to-transparent" />
         <div className="space-y-8">
           {experiences.map((experience, index) => (
-            <ExperienceCard key={index} experience={experience} />
+            <ExperienceCard key={experience.company} experience={experience} index={index} />
           ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   )
 }
-

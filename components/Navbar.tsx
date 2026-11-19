@@ -3,13 +3,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { FaGithub, FaLinkedin } from "react-icons/fa"
 
-const navItems = ["About", "Experience", "Education", "Projects", "Skills"]
-
-const telemetry = [
-  { label: "Fleet", value: "10+ AMRs" },
-  { label: "Stack", value: "ROS2 · C++ · Python" },
-  { label: "Sensors", value: "LiDAR · Radar · GPS/GNSS · IMU" },
-]
+const navItems = ["About", "Experience", "Projects", "Education", "Skills", "Contact"]
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -29,7 +23,7 @@ export default function Navbar() {
       const triggerPosition = window.innerHeight / 3
       let current: string | null = null
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-        current = "skills"
+        current = "contact"
       } else {
         for (const section of sections) {
           if (section.top <= triggerPosition && section.bottom >= triggerPosition) {
@@ -93,7 +87,7 @@ export default function Navbar() {
       >
         <div className="flex-1 overflow-y-auto p-8">
           <p className="hud-label">FIELD / ROBOTICS</p>
-          <img src="animated-portrait.webp" alt="Keval Visaria" className="mt-6 h-28 w-28 border border-emerald-400/40 object-cover" />
+          <img src="animated-portrait.webp" alt="Keval Visaria" className="mt-6 h-28 w-28 border border-emerald-400/40 object-cover transition-transform duration-300 hover:scale-105" />
           <button onClick={() => scrollToSection("about")} className="mt-4 text-left">
             <span className="font-display text-3xl font-bold leading-tight tracking-tight text-zinc-50">
               Keval <span className="gradient-text">Visaria</span>
@@ -102,16 +96,16 @@ export default function Navbar() {
           <p className="mt-2 text-sm font-medium text-zinc-200">Robotics Field Engineer</p>
           <p className="mt-1 text-sm text-zinc-400">Meta (via Beyondsoft) — Temple, TX</p>
           <p className="mt-4 flex items-center gap-2 font-mono text-[10px] tracking-[0.18em] text-zinc-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald-400" />
             IN PRODUCTION
           </p>
 
-          <nav className="mt-10 space-y-1 border-t border-white/10 pt-8">
+          <nav className="mt-8 space-y-1 border-t border-white/10 pt-6">
             {navItems.map((item, index) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className={`flex w-full items-center justify-between px-3 py-3 text-left text-sm font-medium transition-colors ${
+                className={`group flex w-full items-center justify-between px-3 py-2.5 text-left text-sm font-medium transition-colors ${
                   activeSection === item.toLowerCase()
                     ? "bg-emerald-400/10 text-emerald-300 ring-1 ring-emerald-400/40"
                     : "text-zinc-400 hover:bg-white/[0.03] hover:text-emerald-300"
@@ -121,21 +115,15 @@ export default function Navbar() {
                   <span className="mr-2 font-mono text-[10px] text-zinc-500">0{index + 1}</span>
                   {item}
                 </span>
-                <span className="font-mono text-zinc-600">→</span>
+                <span className="font-mono text-zinc-600 transition-transform group-hover:translate-x-1">→</span>
               </button>
             ))}
           </nav>
 
-          <div className="mt-10 border-t border-white/10 pt-8">
-            <p className="hud-label mb-4">Telemetry</p>
-            <dl className="space-y-3">
-              {telemetry.map((item) => (
-                <div key={item.label} className="flex items-baseline justify-between gap-3">
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">{item.label}</dt>
-                  <dd className="text-right text-xs font-medium text-zinc-200">{item.value}</dd>
-                </div>
-              ))}
-            </dl>
+          <div className="mt-8">
+            <button onClick={() => scrollToSection("contact")} className="btn-primary w-full justify-center">
+              Get in touch
+            </button>
           </div>
         </div>
 

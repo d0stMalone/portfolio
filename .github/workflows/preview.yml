@@ -1,0 +1,33 @@
+# Builds the site on any branch other than main and uploads the static
+# output as a downloadable artifact, so changes can be checked before merging.
+name: Preview build
+
+on:
+  push:
+    branches-ignore: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Configure Next.js for static export
+        uses: actions/configure-pages@v5
+        with:
+          static_site_generator: next
+      - run: npm ci
+      - run: npx --no-install next build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-preview
+          path: ./out
+          retention-days: 7
