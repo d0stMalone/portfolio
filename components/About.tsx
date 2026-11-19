@@ -69,7 +69,7 @@ export default function About() {
               SYS.STATUS — FIELD OPERATIONS // ROS2
             </p>
             {site.photo && (
-              <img src={site.photo} alt="Keval Visaria" className="mb-5 h-20 w-20 border border-white/15 object-cover p-0.5 lg:hidden" />
+              <img src={site.photo} alt="Keval Visaria" className="mb-5 h-20 w-20 border border-white/15 object-cover lg:hidden bg-[radial-gradient(circle_at_50%_40%,rgba(255,138,61,0.32),rgba(255,138,61,0.06)_55%,transparent_75%)] bg-[#0f1013]" />
             )}
             <h1 className="font-display text-5xl font-bold leading-[1.02] tracking-tight text-zinc-50 md:text-6xl 2xl:text-7xl">
               Keval <span className="gradient-text">Visaria</span>

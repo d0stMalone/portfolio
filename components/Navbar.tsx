@@ -95,7 +95,7 @@ export default function Navbar() {
           <p className="hud-label">FIELD / ROBOTICS</p>
           {site.photo ? (
             <div className="ticks relative mt-4 h-24 w-24 border border-white/15 p-1">
-              <img src={site.photo} alt="Keval Visaria" className="h-full w-full object-cover" />
+              <img src={site.photo} alt="Keval Visaria" className="h-full w-full object-cover bg-[radial-gradient(circle_at_50%_40%,rgba(255,138,61,0.32),rgba(255,138,61,0.06)_55%,transparent_75%)] bg-[#0f1013]" />
               <span className="absolute -bottom-2 -right-2 bg-[#0b0b0d] p-0.5">
                 <Logo className="h-6 w-6" />
               </span>
