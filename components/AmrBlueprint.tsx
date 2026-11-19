@@ -100,8 +100,8 @@ export default function AmrBlueprint({ className = "" }: { className?: string })
         <g fontFamily="var(--font-mono), monospace" fontSize="7.5" fill="#71717a">
           <rect x="372" y="318" width="136" height="30" fill="none" stroke="rgba(255,255,255,0.15)" />
           <line x1="372" y1="333" x2="508" y2="333" stroke="rgba(255,255,255,0.15)" />
-          <text x="378" y="329" letterSpacing="0.08em">FIELD UNIT · SENSOR LAYOUT</text>
-          <text x="378" y="344" letterSpacing="0.08em">DWG KV-001 · REV B</text>
+          <text x="378" y="329" letterSpacing="0.03em">FIELD UNIT · SENSOR LAYOUT</text>
+          <text x="378" y="344" letterSpacing="0.03em">DWG KV-001 · REV B</text>
         </g>
       </svg>
       <figcaption className="mt-3 font-mono text-[10px] tracking-[0.18em] text-zinc-500">THE SENSORS I VALIDATE IN THE FIELD</figcaption>
