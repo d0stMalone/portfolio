@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: read
 
 jobs:
@@ -31,3 +31,15 @@ jobs:
           name: site-preview
           path: ./out
           retention-days: 7
+      # Also publish the built files to a throwaway branch so they can be
+      # fetched with plain git for review.
+      - name: Push build to preview-build branch
+        run: |
+          cd out
+          touch .nojekyll
+          git init -q -b preview-build
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Preview build of ${GITHUB_SHA::7} from ${GITHUB_REF_NAME}"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" preview-build
