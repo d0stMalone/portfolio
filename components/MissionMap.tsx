@@ -70,10 +70,10 @@ export default function MissionMap({ onNavigate }: { onNavigate: (id: string) =>
         <p className="hud-label">Mission</p>
         <p className="font-mono text-[10px] text-zinc-500">{pct.toString().padStart(3, " ")}% · wp {Math.min(i + (f > 0.98 ? 2 : 1), 6)}/6</p>
       </div>
-      <svg viewBox="0 0 256 110" className="w-full border border-white/10 bg-[#050807]">
+      <svg viewBox="0 0 256 110" className="w-full border border-white/10 bg-[#09090b]">
         <defs>
           <pattern id="mm-grid" width="16" height="16" patternUnits="userSpaceOnUse">
-            <path d="M16 0H0V16" fill="none" stroke="rgba(52,211,153,0.07)" />
+            <path d="M16 0H0V16" fill="none" stroke="rgba(255,138,61,0.07)" />
           </pattern>
         </defs>
         <rect width="256" height="110" fill="url(#mm-grid)" />
@@ -84,8 +84,8 @@ export default function MissionMap({ onNavigate }: { onNavigate: (id: string) =>
           <rect x="140" y="72" width="50" height="14" />
           <rect x="196" y="28" width="14" height="22" />
         </g>
-        <polyline points={route} fill="none" stroke="rgba(52,211,153,0.35)" strokeDasharray="3 3" />
-        <polyline points={done} fill="none" stroke="#34d399" strokeWidth="1.6" />
+        <polyline points={route} fill="none" stroke="rgba(255,138,61,0.35)" strokeDasharray="3 3" />
+        <polyline points={done} fill="none" stroke="#ff8a3d" strokeWidth="1.6" />
         {WAYPOINTS.map((w, idx) => (
           <g key={w.id} className="cursor-pointer" onClick={() => onNavigate(w.id)}>
             <circle cx={w.x} cy={w.y} r="9" fill="transparent" />
@@ -93,8 +93,8 @@ export default function MissionMap({ onNavigate }: { onNavigate: (id: string) =>
               cx={w.x}
               cy={w.y}
               r="3.2"
-              fill={idx <= p + 0.02 ? "#34d399" : "#050807"}
-              stroke={idx <= p + 0.02 ? "#34d399" : "rgba(255,255,255,0.35)"}
+              fill={idx <= p + 0.02 ? "#ff8a3d" : "#09090b"}
+              stroke={idx <= p + 0.02 ? "#ff8a3d" : "rgba(255,255,255,0.35)"}
             />
             <text x={w.x} y={w.y - 7} textAnchor="middle" fontSize="7" fill="rgba(161,161,170,0.8)" fontFamily="monospace">
               0{idx + 1}
@@ -103,12 +103,12 @@ export default function MissionMap({ onNavigate }: { onNavigate: (id: string) =>
         ))}
         {/* robot */}
         <g transform={`translate(${rx} ${ry}) rotate(${heading})`}>
-          <circle r="11" fill="rgba(52,211,153,0.12)">
+          <circle r="11" fill="rgba(255,138,61,0.12)">
             <animate attributeName="r" values="6;12;6" dur="2s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite" />
           </circle>
-          <rect x="-5" y="-4" width="10" height="8" fill="#050807" stroke="#6ee7b7" />
-          <path d="M5 -3 L9 0 L5 3 Z" fill="#a3e635" />
+          <rect x="-5" y="-4" width="10" height="8" fill="#09090b" stroke="#ffb070" />
+          <path d="M5 -3 L9 0 L5 3 Z" fill="#fbbf24" />
         </g>
       </svg>
     </div>

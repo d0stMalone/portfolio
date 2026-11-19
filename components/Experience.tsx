@@ -100,7 +100,7 @@ function ExperienceCard({ experience, index }: { experience: Exp; index: number 
       {/* timeline node */}
       <span
         className={`absolute left-0 top-7 flex h-[15px] w-[15px] -translate-x-1/2 items-center justify-center border ${
-          current ? "border-emerald-400 bg-emerald-400/20" : "border-white/25 bg-[#050807]"
+          current ? "border-emerald-400 bg-emerald-400/20" : "border-white/25 bg-[#09090b]"
         }`}
       >
         <span className={`h-[5px] w-[5px] ${current ? "pulse-dot bg-emerald-400" : "bg-zinc-500"}`} />

@@ -23,7 +23,7 @@ function ProjectImage({
   // `darken` flips white-background plots into a dark theme for the cards.
   const flip = light && darken
   return (
-    <div className={`overflow-hidden border border-white/10 ${light && !flip ? "bg-white" : "bg-[#0a100f]"} ${className}`}>
+    <div className={`overflow-hidden border border-white/10 ${light && !flip ? "bg-white" : "bg-[#0f1013]"} ${className}`}>
       <img
         src={src}
         alt={alt}
@@ -52,7 +52,7 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
             </Dialog.Overlay>
             <Dialog.Content asChild forceMount>
               <motion.div
-                className="fixed inset-x-3 bottom-3 top-16 z-[80] mx-auto max-w-3xl overflow-y-auto border border-white/15 bg-[#080d0c] p-6 shadow-2xl focus:outline-none sm:inset-x-6 sm:top-[8vh] sm:bottom-[8vh] md:p-10"
+                className="fixed inset-x-3 bottom-3 top-16 z-[80] mx-auto max-w-3xl overflow-y-auto border border-white/15 bg-[#0c0d10] p-6 shadow-2xl focus:outline-none sm:inset-x-6 sm:top-[8vh] sm:bottom-[8vh] md:p-10"
                 initial={{ opacity: 0, y: 30, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 20, scale: 0.98 }}
@@ -264,7 +264,7 @@ export default function Projects() {
               aria-selected={filter === f}
               onClick={() => setFilter(f)}
               className={`relative px-3 py-1.5 font-mono text-xs transition-colors ${
-                filter === f ? "text-[#04110c]" : "text-zinc-400 hover:text-emerald-300"
+                filter === f ? "text-[#1a0b02]" : "text-zinc-400 hover:text-emerald-300"
               }`}
             >
               {filter === f && (

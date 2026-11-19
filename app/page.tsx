@@ -14,7 +14,7 @@ import Terminal from "../components/Terminal"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#050807] text-zinc-200">
+    <main className="min-h-screen bg-[#09090b] text-zinc-200">
       <BootSequence />
       <ScrollProgress />
       <SpotlightProvider />

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { ArrowRight, Bot, FileText, Mail, Radar, Route, Wrench } from "lucide-react"
 import LidarHero3D from "./LidarHero3D"
+import AmrBlueprint from "./AmrBlueprint"
 import Reveal, { SectionHeading } from "./Reveal"
 import { site } from "../lib/site"
 
@@ -102,6 +103,7 @@ export default function About() {
               <span className="border border-emerald-400/40 bg-black/50 px-2 py-1 text-emerald-300">RVIZ2</span>
               <span className="border border-white/10 bg-black/50 px-2 py-1 text-zinc-400">/map</span>
               <span className="border border-white/10 bg-black/50 px-2 py-1 text-cyan-300">/scan</span>
+              <span className="border border-white/10 bg-black/50 px-2 py-1 text-emerald-300">/costmap</span>
               <span className="border border-white/10 bg-black/50 px-2 py-1 text-lime-300">/plan</span>
             </div>
           </div>
@@ -109,7 +111,7 @@ export default function About() {
 
         <div className="grid grid-cols-2 gap-px border-t border-white/10 bg-white/10 lg:grid-cols-4">
           {telemetry.map((item) => (
-            <div key={item.label} className="spotlight bg-[#0a100f] p-4 sm:p-5">
+            <div key={item.label} className="spotlight bg-[#0f1013] p-4 sm:p-5">
               <item.icon className="h-5 w-5 text-emerald-400" />
               <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">{item.label}</p>
               <p className="mt-1 text-sm font-medium leading-snug text-zinc-100">{item.value}</p>
@@ -118,36 +120,34 @@ export default function About() {
         </div>
       </motion.div>
 
-      <div className="mt-20 grid gap-10 lg:grid-cols-[220px_1fr]">
-        <div>
-          <SectionHeading index="01" label="ABOUT" title="About me" />
-          <Reveal delay={0.1}>
-            <img
-              src="robot-character.webp"
-              alt="Field robot illustration"
-              className="mt-6 hidden w-full border border-white/10 object-cover lg:block"
-            />
+      <div className="mt-20">
+        <SectionHeading index="01" label="ABOUT" title="About me" />
+        <div className="mt-8 grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]">
+          <Reveal delay={0.05}>
+            <div className="space-y-5 text-lg leading-relaxed text-zinc-300">
+              <p>
+                I&apos;m a robotics engineer who works where robots actually have to run: in production, outdoors, around
+                people and machinery — not just in simulation. My current work is field robotics: system setup and
+                validation, structured autonomy testing, sensor profiling, and debugging live robots with logs, ROS
+                bags, and the tools that show what really happened.
+              </p>
+              <p>
+                That field work sits on an embedded foundation: firmware in C and C++, PCB design and bring-up, control
+                systems, and sensor fusion. Whether it&apos;s a humanoid arm, a mobile robot, or a fleet of autonomous
+                units, I enjoy bringing hardware, code, and mechanics together into systems that keep working after
+                deployment.
+              </p>
+              <p className="border-l-2 border-emerald-400 pl-4 font-display text-xl font-medium text-emerald-300">
+                Build it, test it in the field, fix what breaks, ship it again.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <div className="panel ticks p-4 sm:p-5">
+              <AmrBlueprint />
+            </div>
           </Reveal>
         </div>
-        <Reveal delay={0.05}>
-          <div className="space-y-5 text-lg leading-relaxed text-zinc-300">
-            <p>
-              I&apos;m a robotics engineer who works where robots actually have to run: in production, outdoors, around
-              people and machinery — not just in simulation. My current work is field robotics: system setup and
-              validation, structured autonomy testing, sensor profiling, and debugging live robots with logs, ROS bags,
-              and the tools that show what really happened.
-            </p>
-            <p>
-              That field work sits on an embedded foundation: firmware in C and C++, PCB design and bring-up, control
-              systems, and sensor fusion. Whether it&apos;s a humanoid arm, a mobile robot, or a fleet of autonomous
-              units, I enjoy bringing hardware, code, and mechanics together into systems that keep working after
-              deployment.
-            </p>
-            <p className="border-l-2 border-emerald-400 pl-4 font-display text-xl font-medium text-emerald-300">
-              Build it, test it in the field, fix what breaks, ship it again.
-            </p>
-          </div>
-        </Reveal>
       </div>
     </section>
   )

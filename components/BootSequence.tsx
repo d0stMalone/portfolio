@@ -38,7 +38,7 @@ export default function BootSequence() {
   if (gone) return null
 
   return (
-    <div id="boot" onClick={() => setGone(true)} className="boot fixed inset-0 z-[100] flex cursor-pointer flex-col justify-center bg-[#030605] px-6 sm:px-12">
+    <div id="boot" onClick={() => setGone(true)} className="boot fixed inset-0 z-[100] flex cursor-pointer flex-col justify-center bg-[#060607] px-6 sm:px-12">
       <div className="mx-auto w-full max-w-3xl font-mono text-[12px] leading-relaxed sm:text-sm">
         {LINES.map(([kind, text], i) => (
           <div

@@ -8,4 +8,6 @@ export const site = {
   email: "visariakeval@gmail.com",
   // e.g. "Keval-Visaria-Resume.pdf" placed in /public
   resumeUrl: "",
+  // a real headshot in /public, e.g. "keval.jpg"; leave empty to show the KV monogram
+  photo: "",
 }

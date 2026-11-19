@@ -113,7 +113,7 @@ export default function LidarScan({ className = "" }: { className?: string }) {
       ctx!.clearRect(0, 0, w, h)
 
       // range rings + crosshair
-      ctx!.strokeStyle = "rgba(52,211,153,0.10)"
+      ctx!.strokeStyle = "rgba(255,138,61,0.10)"
       ctx!.lineWidth = 1
       for (let r = 1; r <= 4; r++) {
         ctx!.beginPath()
@@ -133,15 +133,15 @@ export default function LidarScan({ className = "" }: { className?: string }) {
           ? ctx!.createConicGradient(angle - 0.9, cx, cy)
           : null
         if (grad) {
-          grad.addColorStop(0, "rgba(52,211,153,0)")
-          grad.addColorStop(0.143, "rgba(52,211,153,0.16)")
-          grad.addColorStop(0.144, "rgba(52,211,153,0)")
+          grad.addColorStop(0, "rgba(255,138,61,0)")
+          grad.addColorStop(0.143, "rgba(255,138,61,0.16)")
+          grad.addColorStop(0.144, "rgba(255,138,61,0)")
           ctx!.fillStyle = grad
           ctx!.beginPath()
           ctx!.arc(cx, cy, scale, 0, Math.PI * 2)
           ctx!.fill()
         }
-        ctx!.strokeStyle = "rgba(110,231,183,0.55)"
+        ctx!.strokeStyle = "rgba(255,176,112,0.55)"
         ctx!.beginPath()
         ctx!.moveTo(cx, cy)
         ctx!.lineTo(cx + Math.cos(angle) * scale, cy + Math.sin(angle) * scale)
@@ -157,18 +157,18 @@ export default function LidarScan({ className = "" }: { className?: string }) {
           continue
         }
         const a = 1 - age / LIFE
-        ctx!.fillStyle = pt.dyn ? `rgba(34,211,238,${a})` : `rgba(110,231,183,${a * 0.9})`
+        ctx!.fillStyle = pt.dyn ? `rgba(34,211,238,${a})` : `rgba(255,176,112,${a * 0.9})`
         const px = cx + pt.x * scale
         const py = cy + pt.y * scale
         ctx!.fillRect(px - 1, py - 1, pt.dyn ? 2.6 : 2, pt.dyn ? 2.6 : 2)
       }
 
       // robot
-      ctx!.fillStyle = "#34d399"
+      ctx!.fillStyle = "#ff8a3d"
       ctx!.beginPath()
       ctx!.arc(cx, cy, 4, 0, Math.PI * 2)
       ctx!.fill()
-      ctx!.strokeStyle = "rgba(52,211,153,0.5)"
+      ctx!.strokeStyle = "rgba(255,138,61,0.5)"
       ctx!.strokeRect(cx - 9, cy - 7, 18, 14)
     }
 

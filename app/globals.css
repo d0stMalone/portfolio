@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  background-color: #050807;
+  background-color: #09090b;
   color: #e4e4e7;
 }
 
@@ -22,7 +22,7 @@ body {
 }
 
 .panel-hover:hover {
-  border-color: rgba(52, 211, 153, 0.45);
+  border-color: rgba(255,138,61, 0.45);
   transform: translateY(-2px);
 }
 
@@ -31,7 +31,7 @@ body {
   font-size: 0.68rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #6ee7b7;
+  color: #ffb070;
 }
 
 .section-index {
@@ -42,15 +42,15 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, #34d399, #22d3ee 60%, #a3e635);
+  background: linear-gradient(90deg, #ff8a3d, #ffb070);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 ::selection {
-  background: #34d399;
-  color: #050807;
+  background: #ff8a3d;
+  color: #09090b;
 }
 
 ::-webkit-scrollbar {
@@ -58,7 +58,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0f0e;
+  background: #0f1013;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -67,7 +67,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #34d399;
+  background: #ff8a3d;
 }
 
 section {
@@ -88,7 +88,7 @@ section {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(52, 211, 153, 0.11), transparent 60%);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255,138,61, 0.11), transparent 60%);
 }
 
 .spotlight:hover::before {
@@ -106,10 +106,10 @@ section {
   inset: -1px;
   pointer-events: none;
   background:
-    linear-gradient(#34d399, #34d399) top left / 10px 1px no-repeat,
-    linear-gradient(#34d399, #34d399) top left / 1px 10px no-repeat,
-    linear-gradient(#34d399, #34d399) bottom right / 10px 1px no-repeat,
-    linear-gradient(#34d399, #34d399) bottom right / 1px 10px no-repeat;
+    linear-gradient(#ff8a3d, #ff8a3d) top left / 10px 1px no-repeat,
+    linear-gradient(#ff8a3d, #ff8a3d) top left / 1px 10px no-repeat,
+    linear-gradient(#ff8a3d, #ff8a3d) bottom right / 10px 1px no-repeat,
+    linear-gradient(#ff8a3d, #ff8a3d) bottom right / 1px 10px no-repeat;
   opacity: 0.7;
 }
 
@@ -124,16 +124,16 @@ section {
 }
 
 .chip:hover {
-  border-color: rgba(52, 211, 153, 0.45);
-  color: #6ee7b7;
+  border-color: rgba(255,138,61, 0.45);
+  color: #ffb070;
 }
 
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: #34d399;
-  color: #04110c;
+  background: #ff8a3d;
+  color: #1a0b02;
   padding: 0.7rem 1.15rem;
   font-weight: 600;
   font-size: 0.9rem;
@@ -141,9 +141,9 @@ section {
 }
 
 .btn-primary:hover {
-  background: #6ee7b7;
+  background: #ffb070;
   transform: translateY(-1px);
-  box-shadow: 0 8px 30px -8px rgba(52, 211, 153, 0.6);
+  box-shadow: 0 8px 30px -8px rgba(255,138,61, 0.6);
 }
 
 .btn-ghost {
@@ -159,8 +159,8 @@ section {
 }
 
 .btn-ghost:hover {
-  border-color: rgba(52, 211, 153, 0.6);
-  color: #6ee7b7;
+  border-color: rgba(255,138,61, 0.6);
+  color: #ffb070;
   transform: translateY(-1px);
 }
 

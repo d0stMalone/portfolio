@@ -358,7 +358,7 @@ export default function Terminal() {
     <>
       <button
         onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-5 right-5 z-[65] flex items-center gap-2 border border-emerald-400/40 bg-[#050807]/90 px-3 py-2 font-mono text-xs text-emerald-300 shadow-[0_0_30px_-10px_rgba(52,211,153,0.7)] backdrop-blur transition-colors hover:bg-emerald-400 hover:text-[#04110c]"
+        className="fixed bottom-5 right-5 z-[65] flex items-center gap-2 border border-emerald-400/40 bg-[#09090b]/90 px-3 py-2 font-mono text-xs text-emerald-300 shadow-[0_0_30px_-10px_rgba(255,138,61,0.7)] backdrop-blur transition-colors hover:bg-emerald-400 hover:text-[#1a0b02]"
         aria-label="Open terminal"
       >
         <TerminalSquare className="h-4 w-4" />
@@ -375,7 +375,7 @@ export default function Terminal() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-x-3 bottom-3 z-[90] mx-auto flex h-[min(70vh,520px)] max-w-3xl flex-col border border-emerald-400/30 bg-[#030605]/95 shadow-[0_0_80px_-20px_rgba(52,211,153,0.5)] backdrop-blur-md sm:inset-x-6 sm:bottom-6"
+            className="fixed inset-x-3 bottom-3 z-[90] mx-auto flex h-[min(70vh,520px)] max-w-3xl flex-col border border-emerald-400/30 bg-[#060607]/95 shadow-[0_0_80px_-20px_rgba(255,138,61,0.5)] backdrop-blur-md sm:inset-x-6 sm:bottom-6"
             onClick={() => inputRef.current?.focus()}
           >
             <div className="flex items-center justify-between border-b border-white/10 px-4 py-2">

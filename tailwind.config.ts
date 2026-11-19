@@ -16,6 +16,16 @@ const config: Config = {
     			mono: ['var(--font-mono)', 'monospace'],
     		},
   		colors: {
+  			// Signal palette: "emerald" is remapped to safety orange and "lime" to amber,
+  			// so existing utility classes pick up the new brand colors.
+  			emerald: {
+  				50: '#fff6ed', 100: '#ffead4', 200: '#ffd0a8', 300: '#ffb070', 400: '#ff8a3d',
+  				500: '#ff6b12', 600: '#e85607', 700: '#c04208', 800: '#98350f', 900: '#7a2e10', 950: '#421405',
+  			},
+  			lime: {
+  				50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24',
+  				500: '#f59e0b', 600: '#d97706', 700: '#b45309', 800: '#92400e', 900: '#78350f', 950: '#451a03',
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

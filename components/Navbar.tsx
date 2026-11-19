@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { FaGithub, FaLinkedin } from "react-icons/fa"
 import MissionMap from "./MissionMap"
+import { site } from "../lib/site"
 
 const navItems = ["About", "Experience", "Projects", "Education", "Skills", "Contact"]
 
@@ -56,7 +57,7 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#050807]/95 backdrop-blur-md lg:hidden"
+        className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#09090b]/95 backdrop-blur-md lg:hidden"
       >
         <div className="flex h-16 items-center justify-between px-4 sm:px-6">
           <button onClick={() => scrollToSection("about")} className="font-display text-lg font-bold tracking-tight text-zinc-100">
@@ -88,7 +89,16 @@ export default function Navbar() {
       >
         <div className="flex-1 overflow-y-auto px-8 py-7">
           <p className="hud-label">FIELD / ROBOTICS</p>
-          <img src="animated-portrait.webp" alt="Keval Visaria" className="mt-4 h-20 w-20 border border-emerald-400/40 object-cover transition-transform duration-300 hover:scale-105" />
+          {site.photo ? (
+            <img src={site.photo} alt="Keval Visaria" className="mt-4 h-20 w-20 border border-emerald-400/40 object-cover" />
+          ) : (
+            <div className="ticks group relative mt-4 flex h-16 w-16 items-center justify-center border border-white/15 bg-white/[0.03]" aria-hidden="true">
+              <span className="font-display text-2xl font-bold tracking-tight text-zinc-50 transition-colors group-hover:text-emerald-300">
+                K<span className="text-emerald-400">V</span>
+              </span>
+              <span className="pulse-dot absolute -right-1 -top-1 h-2 w-2 rounded-full bg-emerald-400" />
+            </div>
+          )}
           <button onClick={() => scrollToSection("about")} className="mt-4 text-left">
             <span className="font-display text-3xl font-bold leading-tight tracking-tight text-zinc-50">
               Keval <span className="gradient-text">Visaria</span>

@@ -31,7 +31,7 @@ export const metadata = {
 }
 
 export const viewport = {
-  themeColor: "#050807",
+  themeColor: "#09090b",
 }
 
 export default function RootLayout({
@@ -50,7 +50,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${mono.variable} ${display.variable} bg-[#050807] font-body text-zinc-200 antialiased`}
+        className={`${inter.variable} ${mono.variable} ${display.variable} bg-[#09090b] font-body text-zinc-200 antialiased`}
       >
         {children}
       </body>
