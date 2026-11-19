@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { ArrowRight, Bot, FileText, Mail, Radar, Route, Wrench } from "lucide-react"
 import LidarHero3D from "./LidarHero3D"
-import AmrBlueprint from "./AmrBlueprint"
+import FieldNotes from "./FieldNotes"
 import Reveal, { SectionHeading } from "./Reveal"
 import { site } from "../lib/site"
 
@@ -99,7 +99,7 @@ export default function About() {
             <div className="absolute inset-0">
               <LidarHero3D className="h-full w-full" />
             </div>
-            <div className="pointer-events-none absolute left-3 top-3 flex flex-wrap gap-2 font-mono text-[10px] tracking-[0.15em]">
+            <div className="pointer-events-none absolute left-3 right-14 top-3 z-10 flex flex-wrap gap-2 font-mono text-[10px] tracking-[0.15em]">
               <span className="border border-emerald-400/40 bg-black/50 px-2 py-1 text-emerald-300">RVIZ2</span>
               <span className="border border-white/10 bg-black/50 px-2 py-1 text-zinc-400">/map</span>
               <span className="border border-white/10 bg-black/50 px-2 py-1 text-cyan-300">/scan</span>
@@ -143,9 +143,7 @@ export default function About() {
             </div>
           </Reveal>
           <Reveal delay={0.12}>
-            <div className="panel ticks p-4 sm:p-5">
-              <AmrBlueprint />
-            </div>
+            <FieldNotes />
           </Reveal>
         </div>
       </div>

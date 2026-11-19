@@ -1,7 +1,10 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { Crosshair, Hand, Minus, Plus, RotateCcw, X } from "lucide-react"
 import LidarScan from "./LidarScan"
+
+type ViewApi = { zoom: (f: number) => void; reset: () => void; setFollow: (on: boolean) => void; setTouchExplore: (on: boolean) => void }
 
 /**
  * RViz-style scene of a warehouse:
@@ -61,7 +64,14 @@ function distBox(x: number, z: number, b: Box) {
 export default function LidarHero3D({ className = "" }: { className?: string }) {
   const mountRef = useRef<HTMLDivElement>(null)
   const poseRef = useRef<HTMLSpanElement>(null)
+  const apiRef = useRef<ViewApi | null>(null)
   const [fallback, setFallback] = useState(false)
+  const [ready, setReady] = useState(false)
+  const [wheelArmed, setWheelArmed] = useState(false)
+  const [manual, setManual] = useState(false)
+  const [follow, setFollow] = useState(true)
+  const [coarse, setCoarse] = useState(false)
+  const [exploring, setExploring] = useState(false)
 
   useEffect(() => {
     const mount = mountRef.current
@@ -77,7 +87,7 @@ export default function LidarHero3D({ className = "" }: { className?: string }) 
       return
     }
 
-    import("three").then((THREE) => {
+    Promise.all([import("three"), import("three/examples/jsm/controls/OrbitControls.js")]).then(([THREE, { OrbitControls }]) => {
       if (disposed) return
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       const disposables: { dispose: () => void }[] = []
@@ -290,6 +300,70 @@ export default function LidarHero3D({ className = "" }: { className?: string }) 
       const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting))
       io.observe(mount)
 
+      // ── camera controls ───────────────────────────────────────
+      // Auto camera until the visitor grabs it; then OrbitControls takes over.
+      // Wheel zoom is only armed after a click inside the scene so page scrolling is never hijacked.
+      const isCoarse = window.matchMedia("(pointer: coarse)").matches
+      setCoarse(isCoarse)
+      const controls = new OrbitControls(camera, renderer.domElement)
+      controls.enableDamping = true
+      controls.dampingFactor = 0.08
+      controls.minDistance = 4
+      controls.maxDistance = 48
+      controls.maxPolarAngle = Math.PI * 0.47
+      controls.enableZoom = false
+      controls.enabled = !isCoarse
+      controls.screenSpacePanning = false
+      const setTouch = (on: boolean) => (renderer.domElement.style.touchAction = on ? "none" : "pan-y")
+      setTouch(false)
+      let auto = true
+      let followOn = true
+      const lastRobot = new THREE.Vector3()
+      const goManual = () => {
+        if (!auto) return
+        auto = false
+        controls.target.set(robot.position.x * 0.35, 0, robot.position.z * 0.35)
+        controls.update()
+        setManual(true)
+      }
+      controls.addEventListener("start", goManual)
+      const arm = () => {
+        controls.enableZoom = true
+        setWheelArmed(true)
+      }
+      const disarm = () => {
+        if (isCoarse) return
+        controls.enableZoom = false
+        setWheelArmed(false)
+      }
+      renderer.domElement.addEventListener("pointerdown", arm)
+      renderer.domElement.addEventListener("pointerleave", disarm)
+      renderer.domElement.addEventListener("dblclick", () => (auto = true, setManual(false)))
+      const tmpOff = new THREE.Vector3()
+      apiRef.current = {
+        zoom: (f) => {
+          goManual()
+          tmpOff.copy(camera.position).sub(controls.target)
+          const d = Math.min(Math.max(tmpOff.length() * f, controls.minDistance), controls.maxDistance)
+          tmpOff.setLength(d)
+          camera.position.copy(controls.target).add(tmpOff)
+          controls.update()
+        },
+        reset: () => {
+          auto = true
+          setManual(false)
+        },
+        setFollow: (on) => {
+          followOn = on
+        },
+        setTouchExplore: (on) => {
+          controls.enabled = on
+          controls.enableZoom = on
+          setTouch(on)
+        },
+      }
+      setReady(true)
+
       // ── simulation ────────────────────────────────────────────
       const tan = new THREE.Vector3()
       const tmp = new THREE.Vector3()
@@ -393,13 +467,24 @@ export default function LidarHero3D({ className = "" }: { className?: string }) 
         costmap.instanceMatrix.needsUpdate = true
         if (costmap.instanceColor) costmap.instanceColor.needsUpdate = true
 
-        // camera: wide isometric view, slow orbit + mouse parallax
-        cam.x += (mouse.x - cam.x) * 0.04
-        cam.y += (mouse.y - cam.y) * 0.04
-        const orbit = 0.95 + Math.sin(t * 0.05) * 0.3 + cam.x * 0.3
-        const R = camera.aspect < 1 ? 26 : 21
-        camera.position.set(rx * 0.25 + Math.cos(orbit) * R, 14 - cam.y * 2, rz * 0.25 + Math.sin(orbit) * R)
-        camera.lookAt(rx * 0.35, 0, rz * 0.35)
+        // camera
+        if (auto) {
+          cam.x += (mouse.x - cam.x) * 0.04
+          cam.y += (mouse.y - cam.y) * 0.04
+          const orbit = 0.95 + Math.sin(t * 0.05) * 0.3 + cam.x * 0.3
+          const R = camera.aspect < 1 ? 26 : 21
+          camera.position.set(rx * 0.25 + Math.cos(orbit) * R, 14 - cam.y * 2, rz * 0.25 + Math.sin(orbit) * R)
+          camera.lookAt(rx * 0.35, 0, rz * 0.35)
+        } else {
+          if (followOn) {
+            // carry the camera along with the robot, keeping the visitor's chosen angle and zoom
+            const toward = tmp.set(rx, 0, rz).sub(controls.target).multiplyScalar(0.06)
+            controls.target.add(toward)
+            camera.position.add(toward)
+          }
+          controls.update()
+        }
+        lastRobot.set(rx, 0, rz)
 
         if (poseRef.current && t - lastPose > 0.12) {
           lastPose = t
@@ -428,6 +513,8 @@ export default function LidarHero3D({ className = "" }: { className?: string }) 
         ro.disconnect()
         io.disconnect()
         window.removeEventListener("pointermove", onMove)
+        controls.dispose()
+        apiRef.current = null
         disposables.forEach((d) => d.dispose())
         costmap.dispose()
         grid.geometry.dispose()
@@ -450,10 +537,80 @@ export default function LidarHero3D({ className = "" }: { className?: string }) 
     )
   }
 
+  const btn =
+    "pointer-events-auto flex h-8 w-8 items-center justify-center border border-white/15 bg-black/60 text-zinc-300 backdrop-blur-sm transition-colors hover:border-emerald-400/60 hover:text-emerald-300"
+
   return (
     <div className={`relative ${className}`}>
-      <div ref={mountRef} className="absolute inset-0" />
-      <div className="pointer-events-none absolute bottom-3 right-3 hidden border border-white/10 bg-black/60 px-3 py-2 font-mono text-[10px] leading-relaxed text-zinc-400 backdrop-blur-sm sm:block">
+      <div ref={mountRef} className={`absolute inset-0 ${manual ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`} />
+
+      {ready && (
+        <>
+          {/* view controls */}
+          <div className="pointer-events-none absolute right-3 top-3 flex flex-col gap-1">
+            <button className={btn} onClick={() => apiRef.current?.zoom(0.75)} aria-label="Zoom in">
+              <Plus className="h-4 w-4" />
+            </button>
+            <button className={btn} onClick={() => apiRef.current?.zoom(1.33)} aria-label="Zoom out">
+              <Minus className="h-4 w-4" />
+            </button>
+            <button
+              className={`${btn} ${follow ? "border-emerald-400/60 text-emerald-300" : ""}`}
+              onClick={() => {
+                const v = !follow
+                setFollow(v)
+                apiRef.current?.setFollow(v)
+              }}
+              aria-label={follow ? "Stop following robot" : "Follow robot"}
+              aria-pressed={follow}
+              title="Follow robot"
+            >
+              <Crosshair className="h-4 w-4" />
+            </button>
+            <button
+              className={btn}
+              onClick={() => {
+                apiRef.current?.reset()
+                setManual(false)
+              }}
+              aria-label="Reset view"
+              title="Reset view (or double-click)"
+            >
+              <RotateCcw className="h-4 w-4" />
+            </button>
+          </div>
+
+          {/* hint / explore toggle */}
+          {coarse ? (
+            <button
+              onClick={() => {
+                const v = !exploring
+                setExploring(v)
+                apiRef.current?.setTouchExplore(v)
+              }}
+              className="absolute bottom-3 left-3 flex items-center gap-1.5 border border-emerald-400/50 bg-black/70 px-2.5 py-1.5 font-mono text-[10px] tracking-[0.12em] text-emerald-300 backdrop-blur-sm"
+            >
+              {exploring ? <X className="h-3.5 w-3.5" /> : <Hand className="h-3.5 w-3.5" />}
+              {exploring ? "DONE EXPLORING" : "EXPLORE 3D"}
+            </button>
+          ) : (
+            <p className="pointer-events-none absolute bottom-3 left-3 border border-white/10 bg-black/60 px-2.5 py-1.5 font-mono text-[10px] tracking-[0.1em] text-zinc-400 backdrop-blur-sm">
+              {wheelArmed ? (
+                <>
+                  <span className="text-emerald-300">SCROLL</span> zoom · <span className="text-emerald-300">DRAG</span> orbit ·{" "}
+                  <span className="text-emerald-300">RIGHT-DRAG</span> pan
+                </>
+              ) : (
+                <>
+                  <span className="text-emerald-300">DRAG</span> to orbit · <span className="text-emerald-300">CLICK</span> to enable zoom
+                </>
+              )}
+            </p>
+          )}
+        </>
+      )}
+
+      <div className="pointer-events-none absolute left-3 top-12 hidden border border-white/10 bg-black/60 px-3 py-2 font-mono text-[10px] leading-relaxed text-zinc-400 backdrop-blur-sm sm:block">
         <div className="text-emerald-300">/amr_01/pose</div>
         <span ref={poseRef} className="whitespace-pre">
           x   0.00  y   0.00  θ    0°
