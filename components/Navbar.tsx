@@ -94,7 +94,12 @@ export default function Navbar() {
         <div className="flex-1 overflow-y-auto px-8 py-7">
           <p className="hud-label">FIELD / ROBOTICS</p>
           {site.photo ? (
-            <img src={site.photo} alt="Keval Visaria" className="mt-4 h-20 w-20 border border-emerald-400/40 object-cover" />
+            <div className="ticks relative mt-4 h-24 w-24 border border-white/15 p-1">
+              <img src={site.photo} alt="Keval Visaria" className="h-full w-full object-cover" />
+              <span className="absolute -bottom-2 -right-2 bg-[#0b0b0d] p-0.5">
+                <Logo className="h-6 w-6" />
+              </span>
+            </div>
           ) : (
             <button onClick={() => scrollToSection("about")} className="mt-4 block transition-transform duration-300 hover:-translate-y-0.5" aria-label="Back to top">
               <Logo className="h-14 w-14" />

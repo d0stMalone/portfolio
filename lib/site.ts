@@ -9,5 +9,5 @@ export const site = {
   // e.g. "Keval-Visaria-Resume.pdf" placed in /public
   resumeUrl: "",
   // a real headshot in /public, e.g. "keval.jpg"; leave empty to show the KV monogram
-  photo: "",
+  photo: "keval.webp",
 }

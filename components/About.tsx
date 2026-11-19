@@ -68,6 +68,9 @@ export default function About() {
               <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald-400" />
               SYS.STATUS — FIELD OPERATIONS // ROS2
             </p>
+            {site.photo && (
+              <img src={site.photo} alt="Keval Visaria" className="mb-5 h-20 w-20 border border-white/15 object-cover p-0.5 lg:hidden" />
+            )}
             <h1 className="font-display text-5xl font-bold leading-[1.02] tracking-tight text-zinc-50 md:text-6xl 2xl:text-7xl">
               Keval <span className="gradient-text">Visaria</span>
             </h1>
