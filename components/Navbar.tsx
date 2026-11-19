@@ -88,7 +88,7 @@ export default function Navbar() {
       >
         <div className="flex-1 overflow-y-auto px-8 py-7">
           <p className="hud-label">FIELD / ROBOTICS</p>
-          <img src="animated-portrait.webp" alt="Keval Visaria" className="mt-5 h-24 w-24 border border-emerald-400/40 object-cover transition-transform duration-300 hover:scale-105" />
+          <img src="animated-portrait.webp" alt="Keval Visaria" className="mt-4 h-20 w-20 border border-emerald-400/40 object-cover transition-transform duration-300 hover:scale-105" />
           <button onClick={() => scrollToSection("about")} className="mt-4 text-left">
             <span className="font-display text-3xl font-bold leading-tight tracking-tight text-zinc-50">
               Keval <span className="gradient-text">Visaria</span>
@@ -101,12 +101,12 @@ export default function Navbar() {
             IN PRODUCTION
           </p>
 
-          <nav className="mt-8 space-y-1 border-t border-white/10 pt-6">
+          <nav className="mt-6 space-y-0.5 border-t border-white/10 pt-5">
             {navItems.map((item, index) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className={`group flex w-full items-center justify-between px-3 py-2.5 text-left text-sm font-medium transition-colors ${
+                className={`group flex w-full items-center justify-between px-3 py-2 text-left text-sm font-medium transition-colors ${
                   activeSection === item.toLowerCase()
                     ? "bg-emerald-400/10 text-emerald-300 ring-1 ring-emerald-400/40"
                     : "text-zinc-400 hover:bg-white/[0.03] hover:text-emerald-300"
@@ -121,18 +121,13 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="mt-8 border-t border-white/10 pt-6">
+          <div className="mt-6 border-t border-white/10 pt-5">
             <MissionMap onNavigate={scrollToSection} />
           </div>
 
-          <div className="mt-6">
-            <button onClick={() => scrollToSection("contact")} className="btn-primary w-full justify-center">
-              Get in touch
-            </button>
-          </div>
         </div>
 
-        <div className="flex items-center gap-4 border-t border-white/10 p-8">
+        <div className="flex items-center gap-4 border-t border-white/10 px-8 py-5">
           <a href="https://github.com/d0stMalone" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-zinc-400 transition-colors hover:text-emerald-300">
             <FaGithub size={22} />
           </a>

@@ -67,7 +67,7 @@ export default function About() {
               <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald-400" />
               SYS.STATUS — FIELD OPERATIONS // ROS2
             </p>
-            <h1 className="font-display text-5xl font-bold leading-[1.02] tracking-tight text-zinc-50 md:text-6xl xl:text-7xl">
+            <h1 className="font-display text-5xl font-bold leading-[1.02] tracking-tight text-zinc-50 md:text-6xl 2xl:text-7xl">
               Keval <span className="gradient-text">Visaria</span>
             </h1>
             <p className="mt-4 font-display text-xl font-medium text-zinc-100 md:text-2xl">Robotics Field Engineer</p>
@@ -95,7 +95,9 @@ export default function About() {
           </div>
 
           <div className="relative min-h-[300px] border-t border-white/10 sm:min-h-[380px] lg:border-l lg:border-t-0">
-            <LidarHero3D className="absolute inset-0" />
+            <div className="absolute inset-0">
+              <LidarHero3D className="h-full w-full" />
+            </div>
             <div className="pointer-events-none absolute left-3 top-3 flex flex-wrap gap-2 font-mono text-[10px] tracking-[0.15em]">
               <span className="border border-emerald-400/40 bg-black/50 px-2 py-1 text-emerald-300">RVIZ2</span>
               <span className="border border-white/10 bg-black/50 px-2 py-1 text-zinc-400">/map</span>
