@@ -26,7 +26,7 @@ function Callout({ x1, y1, x2, y2, label, sub, anchor = "start", color = O }: { 
 export default function AmrBlueprint({ className = "" }: { className?: string }) {
   return (
     <figure className={className}>
-      <svg viewBox="0 0 440 340" className="w-full" role="img" aria-label="Blueprint of an autonomous mobile robot with its sensors labelled: LiDAR, GNSS antenna, camera, radar, IMU and wheel encoders">
+      <svg viewBox="0 0 520 360" className="w-full" role="img" aria-label="Blueprint of an autonomous mobile robot with its sensors labelled: LiDAR, GNSS antenna, camera, radar, IMU and wheel encoders">
         <defs>
           <pattern id="bp-grid" width="20" height="20" patternUnits="userSpaceOnUse">
             <path d="M20 0H0V20" fill="none" stroke="rgba(255,255,255,0.05)" />
@@ -35,7 +35,8 @@ export default function AmrBlueprint({ className = "" }: { className?: string })
             <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(228,228,231,0.12)" strokeWidth="1" />
           </pattern>
         </defs>
-        <rect width="440" height="340" fill="url(#bp-grid)" />
+        <rect width="520" height="360" fill="url(#bp-grid)" />
+        <g transform="translate(20 20)">
 
         {/* ground */}
         <line x1="40" y1="262" x2="400" y2="262" stroke={F} strokeDasharray="6 4" />
@@ -85,20 +86,22 @@ export default function AmrBlueprint({ className = "" }: { className?: string })
           </g>
         ))}
 
+        </g>
+
         {/* callouts */}
-        <Callout x1={264} y1={84} x2={330} y2={46} label="3D LiDAR" sub="SCAN · LOCALISATION" color={C} />
-        <Callout x1={170} y1={114} x2={100} y2={70} label="GNSS" sub="OUTDOOR POSITIONING" anchor="end" />
-        <Callout x1={352} y1={199} x2={398} y2={140} label="Camera" sub="PERCEPTION" anchor="end" color={C} />
-        <Callout x1={350} y1={226} x2={404} y2={292} label="Radar" sub="ALL-WEATHER" anchor="end" />
-        <Callout x1={196} y1={214} x2={60} y2={150} label="IMU" sub="ORIENTATION · RATES" anchor="start" />
-        <Callout x1={136} y1={262} x2={72} y2={300} label="Drive + encoders" sub="ODOMETRY" anchor="start" />
+        <Callout x1={284} y1={104} x2={352} y2={54} label="3D LiDAR" sub="360° SCAN" color={C} />
+        <Callout x1={190} y1={134} x2={128} y2={84} label="GNSS" sub="OUTDOOR POSITIONING" anchor="end" />
+        <Callout x1={216} y1={230} x2={104} y2={176} label="IMU" sub="ATTITUDE · RATES" anchor="end" />
+        <Callout x1={372} y1={219} x2={414} y2={178} label="Camera" sub="PERCEPTION" color={C} />
+        <Callout x1={370} y1={244} x2={414} y2={286} label="Radar" sub="ALL-WEATHER" />
+        <Callout x1={156} y1={282} x2={124} y2={318} label="Drive + encoders" sub="ODOMETRY" anchor="end" />
 
         {/* title block */}
         <g fontFamily="var(--font-mono), monospace" fontSize="7.5" fill="#71717a">
-          <rect x="300" y="306" width="132" height="28" fill="none" stroke="rgba(255,255,255,0.15)" />
-          <line x1="300" y1="320" x2="432" y2="320" stroke="rgba(255,255,255,0.15)" />
-          <text x="306" y="316" letterSpacing="0.08em">FIELD UNIT · SENSOR LAYOUT</text>
-          <text x="306" y="330" letterSpacing="0.08em">DWG KV-001 · REV B</text>
+          <rect x="372" y="318" width="136" height="30" fill="none" stroke="rgba(255,255,255,0.15)" />
+          <line x1="372" y1="333" x2="508" y2="333" stroke="rgba(255,255,255,0.15)" />
+          <text x="378" y="329" letterSpacing="0.08em">FIELD UNIT · SENSOR LAYOUT</text>
+          <text x="378" y="344" letterSpacing="0.08em">DWG KV-001 · REV B</text>
         </g>
       </svg>
       <figcaption className="mt-3 font-mono text-[10px] tracking-[0.18em] text-zinc-500">THE SENSORS I VALIDATE IN THE FIELD</figcaption>
