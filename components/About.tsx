@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { ArrowRight, Bot, FileText, Mail, Radar, Route, Wrench } from "lucide-react"
-import LidarScan from "./LidarScan"
+import LidarHero3D from "./LidarHero3D"
 import Reveal, { SectionHeading } from "./Reveal"
 import { site } from "../lib/site"
 
@@ -61,13 +61,13 @@ export default function About() {
         className="panel ticks relative overflow-hidden"
       >
         <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-emerald-400/10 blur-3xl" />
-        <div className="grid items-center gap-8 p-6 sm:p-8 md:p-12 lg:grid-cols-[1fr_300px]">
-          <div>
+        <div className="grid items-stretch lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+          <div className="relative z-10 p-6 sm:p-8 md:p-12 lg:pr-4">
             <p className="hud-label mb-4 flex items-center gap-2">
               <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald-400" />
               SYS.STATUS — FIELD OPERATIONS // ROS2
             </p>
-            <h1 className="font-display text-5xl font-bold leading-[1.02] tracking-tight text-zinc-50 md:text-7xl">
+            <h1 className="font-display text-5xl font-bold leading-[1.02] tracking-tight text-zinc-50 md:text-6xl xl:text-7xl">
               Keval <span className="gradient-text">Visaria</span>
             </h1>
             <p className="mt-4 font-display text-xl font-medium text-zinc-100 md:text-2xl">Robotics Field Engineer</p>
@@ -94,16 +94,13 @@ export default function About() {
             </div>
           </div>
 
-          <div className="relative mx-auto aspect-square w-full max-w-[200px] sm:max-w-[300px]">
-            <LidarScan className="h-full w-full" />
-            <p className="hud-label absolute left-0 top-0">/scan · live</p>
-            <div className="absolute bottom-0 right-0 flex gap-3 font-mono text-[10px] text-zinc-500">
-              <span className="flex items-center gap-1">
-                <span className="h-1.5 w-1.5 bg-emerald-300" /> static
-              </span>
-              <span className="flex items-center gap-1">
-                <span className="h-1.5 w-1.5 bg-cyan-400" /> dynamic
-              </span>
+          <div className="relative min-h-[300px] border-t border-white/10 sm:min-h-[380px] lg:border-l lg:border-t-0">
+            <LidarHero3D className="absolute inset-0" />
+            <div className="pointer-events-none absolute left-3 top-3 flex flex-wrap gap-2 font-mono text-[10px] tracking-[0.15em]">
+              <span className="border border-emerald-400/40 bg-black/50 px-2 py-1 text-emerald-300">RVIZ2</span>
+              <span className="border border-white/10 bg-black/50 px-2 py-1 text-zinc-400">/map</span>
+              <span className="border border-white/10 bg-black/50 px-2 py-1 text-cyan-300">/scan</span>
+              <span className="border border-white/10 bg-black/50 px-2 py-1 text-lime-300">/plan</span>
             </div>
           </div>
         </div>

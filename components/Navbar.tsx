@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { FaGithub, FaLinkedin } from "react-icons/fa"
+import MissionMap from "./MissionMap"
 
 const navItems = ["About", "Experience", "Projects", "Education", "Skills", "Contact"]
 
@@ -85,9 +86,9 @@ export default function Navbar() {
         transition={{ duration: 0.5 }}
         className="fixed inset-y-0 left-0 z-50 hidden w-80 flex-col border-r border-white/10 bg-[#070b0a] lg:flex"
       >
-        <div className="flex-1 overflow-y-auto p-8">
+        <div className="flex-1 overflow-y-auto px-8 py-7">
           <p className="hud-label">FIELD / ROBOTICS</p>
-          <img src="animated-portrait.webp" alt="Keval Visaria" className="mt-6 h-28 w-28 border border-emerald-400/40 object-cover transition-transform duration-300 hover:scale-105" />
+          <img src="animated-portrait.webp" alt="Keval Visaria" className="mt-5 h-24 w-24 border border-emerald-400/40 object-cover transition-transform duration-300 hover:scale-105" />
           <button onClick={() => scrollToSection("about")} className="mt-4 text-left">
             <span className="font-display text-3xl font-bold leading-tight tracking-tight text-zinc-50">
               Keval <span className="gradient-text">Visaria</span>
@@ -120,7 +121,11 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="mt-8">
+          <div className="mt-8 border-t border-white/10 pt-6">
+            <MissionMap onNavigate={scrollToSection} />
+          </div>
+
+          <div className="mt-6">
             <button onClick={() => scrollToSection("contact")} className="btn-primary w-full justify-center">
               Get in touch
             </button>

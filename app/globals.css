@@ -198,7 +198,49 @@ section {
   }
 }
 
+/* Boot intro: lines appear one by one, then the overlay fades itself out. */
+.boot {
+  animation: boot-out 0.45s ease 2.9s forwards;
+}
+
+.boot-line {
+  opacity: 0;
+  animation: boot-in 0.18s ease forwards;
+}
+
+.boot-bar {
+  width: 0;
+  animation: boot-bar 2.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes boot-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes boot-bar {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes boot-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+html.kv-booted #boot {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  #boot {
+    display: none;
+  }
   html {
     scroll-behavior: auto;
   }

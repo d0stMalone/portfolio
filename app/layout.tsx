@@ -40,7 +40,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        {/* Skip the boot intro on repeat visits within a session, before first paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem("kv-booted"))document.documentElement.classList.add("kv-booted")}catch(e){}`,
+          }}
+        />
+      </head>
       <body
         className={`${inter.variable} ${mono.variable} ${display.variable} bg-[#050807] font-body text-zinc-200 antialiased`}
       >

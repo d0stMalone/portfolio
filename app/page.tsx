@@ -9,10 +9,13 @@ import Contact from "../components/Contact"
 import Footer from "../components/Footer"
 import RoboticGrid from "../components/RoboticGrid"
 import { ScrollProgress, SpotlightProvider } from "../components/Effects"
+import BootSequence from "../components/BootSequence"
+import Terminal from "../components/Terminal"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#050807] text-zinc-200">
+      <BootSequence />
       <ScrollProgress />
       <SpotlightProvider />
       <RoboticGrid />
@@ -30,6 +33,7 @@ export default function Home() {
           <Footer />
         </div>
       </div>
+      <Terminal />
     </main>
   )
 }

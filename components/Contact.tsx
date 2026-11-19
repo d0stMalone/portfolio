@@ -75,6 +75,12 @@ export default function Contact() {
             <span className="flex items-center gap-2 text-zinc-500">
               <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald-400" /> Temple, TX · US Central time
             </span>
+            <button
+              onClick={() => window.dispatchEvent(new Event("open-terminal"))}
+              className="font-mono text-zinc-500 transition-colors hover:text-emerald-300"
+            >
+              psst — try <span className="text-emerald-300">sudo hire keval</span> in the terminal ↗
+            </button>
           </div>
         </div>
       </Reveal>
