@@ -10,4 +10,7 @@ export const site = {
   resumeUrl: "",
   // a real headshot in /public, e.g. "keval.jpg"; leave empty to show the KV monogram
   photo: "keval.webp",
+  // GoatCounter site code for visitor stats (e.g. "kevalvisaria" for kevalvisaria.goatcounter.com);
+  // leave empty to turn stats off
+  goatcounter: "",
 }
