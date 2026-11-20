@@ -35,7 +35,7 @@ const educations = [
 export default function Education() {
   return (
     <section id="education" className="py-16 md:py-24">
-      <SectionHeading index="04" label="EDUCATION" title="Education" />
+      <SectionHeading index="05" label="EDUCATION" title="Education" />
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         {educations.map((edu, index) => (
           <Reveal key={edu.school} delay={index * 0.08} className="h-full">

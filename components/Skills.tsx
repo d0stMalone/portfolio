@@ -30,7 +30,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-16 md:py-24">
       <SectionHeading
-        index="05"
+        index="06"
         label="STACK"
         title="Skills"
         intro="The stack I actually use in the field — not just the stack I studied."

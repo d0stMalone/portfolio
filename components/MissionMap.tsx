@@ -7,11 +7,12 @@ import { useEffect, useMemo, useRef, useState } from "react"
  * as the page scrolls. Clicking a waypoint navigates there.
  */
 const WAYPOINTS = [
-  { id: "about", x: 18, y: 92 },
-  { id: "experience", x: 70, y: 62 },
-  { id: "projects", x: 128, y: 86 },
-  { id: "education", x: 176, y: 40 },
-  { id: "skills", x: 222, y: 70 },
+  { id: "about", x: 16, y: 92 },
+  { id: "experience", x: 52, y: 58 },
+  { id: "competitions", x: 92, y: 88 },
+  { id: "projects", x: 132, y: 54 },
+  { id: "education", x: 172, y: 86 },
+  { id: "skills", x: 210, y: 46 },
   { id: "contact", x: 240, y: 18 },
 ]
 
@@ -68,7 +69,7 @@ export default function MissionMap({ onNavigate }: { onNavigate: (id: string) =>
     <div>
       <div className="mb-2 flex items-center justify-between">
         <p className="hud-label">Mission</p>
-        <p className="font-mono text-[10px] text-zinc-500">{pct.toString().padStart(3, " ")}% · wp {Math.min(i + (f > 0.98 ? 2 : 1), 6)}/6</p>
+        <p className="font-mono text-[10px] text-zinc-500">{pct.toString().padStart(3, " ")}% · wp {Math.min(i + (f > 0.98 ? 2 : 1), WAYPOINTS.length)}/{WAYPOINTS.length}</p>
       </div>
       <svg viewBox="0 0 256 110" className="w-full border border-white/10 bg-[#09090b]">
         <defs>

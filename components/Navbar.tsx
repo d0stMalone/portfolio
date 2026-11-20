@@ -6,7 +6,7 @@ import MissionMap from "./MissionMap"
 import Logo from "./Logo"
 import { site } from "../lib/site"
 
-const navItems = ["About", "Experience", "Projects", "Education", "Skills", "Contact"]
+const navItems = ["About", "Experience", "Competitions", "Projects", "Education", "Skills", "Contact"]
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)

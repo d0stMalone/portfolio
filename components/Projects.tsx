@@ -242,7 +242,7 @@ export default function Projects() {
   return (
     <section id="projects" className="py-16 md:py-24">
       <SectionHeading
-        index="03"
+        index="04"
         label="PROJECTS"
         title="Projects"
         intro="Robotics work first — sensing, navigation and learning-based control — followed by hardware builds and computer vision."

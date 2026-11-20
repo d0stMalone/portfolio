@@ -6,6 +6,7 @@ import Education from "../components/Education"
 import Projects from "../components/Projects"
 import Skills from "../components/Skills"
 import Contact from "../components/Contact"
+import Competitions from "../components/Competitions"
 import Footer from "../components/Footer"
 import RoboticGrid from "../components/RoboticGrid"
 import { ScrollProgress, SpotlightProvider } from "../components/Effects"
@@ -25,6 +26,7 @@ export default function Home() {
           <div className="mx-auto max-w-5xl px-4 pt-24 sm:px-6 lg:px-10 lg:pt-12">
             <About />
             <Experience />
+            <Competitions />
             <Projects />
             <Education />
             <Skills />

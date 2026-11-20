@@ -21,7 +21,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-16 md:py-24">
-      <SectionHeading index="06" label="CONTACT" title="Let's talk robots" />
+      <SectionHeading index="07" label="CONTACT" title="Let's talk robots" />
       <Reveal delay={0.05}>
         <div className="panel ticks spotlight relative mt-10 overflow-hidden p-8 md:p-12">
           <div className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl" />

@@ -308,7 +308,7 @@ export default function Terminal() {
         if (scrollToId(id)) {
           print(<span className="text-zinc-500">navigating to /{id}…</span>)
           setOpen(false)
-        } else print(<span className="text-red-300">no such section: {arg}. Try: about, experience, projects, education, skills, contact</span>)
+        } else print(<span className="text-red-300">no such section: {arg}. Try: about, experience, competitions, projects, education, skills, contact</span>)
         break
       }
       case cmd === "clear":
