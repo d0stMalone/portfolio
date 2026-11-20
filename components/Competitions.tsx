@@ -53,12 +53,13 @@ const entries: Entry[] = [
   {
     name: "FIRST Tech Challenge",
     role: "Mentor",
-    team: "via The Innovation Story · also FRC",
+    team: "FTC team 22985 Paraducks · via The Innovation Story",
     when: "2022 – 2023",
     kind: "Mentor",
     summary:
       "FIRST's high-school robotics programme: student teams design, build and program robots to play a new game each season. I coached teams through FTC and FIRST Robotics Competition (FRC).",
     points: [
+      "Mentored FTC team 22985 Paraducks through the 2022–23 POWERPLAY season",
       "Coached high-school students through robot design, build and programming",
       "Hands-on guidance on mechanisms, wiring and control code for autonomous and driver-controlled periods",
       "Helped teams turn ideas into robots that could complete complex game tasks",
@@ -74,7 +75,7 @@ const entries: Entry[] = [
         label: "Match footage",
       },
       { type: "image", src: "competitions/ftc-robot-cad.webp", alt: "CAD render of an FTC robot with a lift and cone gripper", label: "Robot CAD", light: true },
-      { type: "image", src: "competitions/ftc-cone.webp", alt: "POWERPLAY cone with a custom signal sleeve", label: "Signal sleeve" },
+      { type: "image", src: "competitions/ftc-cone.webp", alt: "POWERPLAY cone with a custom signal sleeve", label: "Paraducks signal sleeve" },
     ],
   },
 ]
