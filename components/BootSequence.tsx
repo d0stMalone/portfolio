@@ -10,7 +10,7 @@ const LINES: [string, string][] = [
   ["ok", "[sensor_check-2] LiDAR ✓  Camera ✓  Radar ✓  GNSS ✓  IMU ✓"],
   ["info", "[fleet_manager-3] connected to 10+ AMRs · Temple, TX"],
   ["info", "[portfolio_node-4] loading experience: Meta · Tatum Robotics · The Innovation Story · KJSCE Robocon"],
-  ["info", "[portfolio_node-4] loading projects: sensor fusion · RL 7-DOF · IMU Allan variance · +9"],
+  ["info", "[portfolio_node-4] loading projects: data-centre SLAM + Nav2 · sensor fusion · RL 7-DOF · +10"],
   ["ok", "[portfolio_node-4] ready. welcome to kevalvisaria.com"],
 ]
 

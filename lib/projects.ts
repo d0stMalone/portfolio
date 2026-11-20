@@ -21,6 +21,38 @@ export type Project = {
 export const projects: Project[] = [
   // ───────────── Featured robotics work ─────────────
   {
+    slug: "datacenter-slam-nav2",
+    title: "Data-Centre SLAM & Autonomous Navigation (ROS 2)",
+    category: "Robotics",
+    featured: true,
+    summary:
+      "A custom differential-drive robot that maps data-centre halls with slam_toolbox and navigates them autonomously with Nav2 + AMCL in Gazebo — tuned for tight 1.2 m rack aisles, with keep-out zones around restricted areas.",
+    highlight: "SLAM map at 99.9% precision vs ground truth · ≤ 10 cm localisation error",
+    description:
+      "An end-to-end ROS 2 Humble stack for a data-centre robot: my own Xacro robot model, generated Gazebo worlds (a 20 × 14 m data hall and a 162 × 38 m building modelled on a real floor plan), SLAM mapping, and Nav2 navigation tuned for narrow aisles. Every phase is documented in the repo.",
+    features: [
+      "Robot model: Xacro URDF with differential drive, 360° 2D lidar, camera and ground-truth pose for evaluation.",
+      "Worlds generated from layout tables by script: a 20 × 14 m data hall and a 162 × 38 m full data-centre building.",
+      "SLAM with slam_toolbox: 99.9% precision, 91.5% wall hit and 92.8% free-space coverage against ground truth.",
+      "Nav2 + AMCL tuned for 1.2 m rack aisles: Theta* planner and Regulated Pure Pursuit give straight, centred paths with ≤ 10 cm localisation error.",
+      "Keep-out and avoid zones (Nav2 costmap filters) generated from a simple YAML file of polygons.",
+    ],
+    insights: [
+      "Inflation shape matters in tight aisles: a flat zero-cost band let paths wobble; a V-shaped cost valley keeps the robot on the centre line.",
+      "Found and fixed the lidar seeing the robot's own body — Nav2 treated it as an obstacle and refused to move.",
+    ],
+    github: "https://github.com/d0stMalone/datacenter-slam-nav2",
+    image: "projects/dc-slam-map.webp",
+    imageAlt: "SLAM map of the data hall overlaid with the true obstacle outlines",
+    imageLight: true,
+    gallery: [
+      { src: "projects/dc-keepout-costmap.webp", alt: "Global costmap with keep-out and avoid zones and two planned paths", light: true },
+      { src: "projects/dc-paths-before-after.webp", alt: "Planned paths before and after tuning the planner and inflation", light: true },
+      { src: "projects/dc-aisle-section.webp", alt: "Costmap cross-section of a 1.2 m rack aisle before and after tuning", light: true },
+    ],
+    skills: ["ROS 2 Humble", "Nav2", "slam_toolbox", "AMCL", "Gazebo", "URDF/Xacro", "Python"],
+  },
+  {
     slug: "sensor-fusion-navigation",
     title: "Sensor-Fusion Navigation with IMU, Magnetometer & GPS",
     category: "Robotics",

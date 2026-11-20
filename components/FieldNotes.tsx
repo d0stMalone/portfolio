@@ -7,7 +7,7 @@ const facts = [
   { k: "Where", v: "Meta (via Beyondsoft) · Temple, TX" },
   { k: "Focus", v: "Field testing · sensor validation · fleet diagnostics" },
   { k: "Foundation", v: "Embedded C/C++ · PCB bring-up · sensor fusion" },
-  { k: "Building next", v: "ROS 2 simulation projects" },
+  { k: "Building next", v: "Autonomous exploration & patrol for my ROS 2 data-centre robot" },
 ]
 
 const journey = [

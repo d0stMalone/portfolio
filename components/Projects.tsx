@@ -126,18 +126,23 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
 }
 
 function FeaturedCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
+  const wide = index === 0
   return (
-    <Reveal delay={(index % 2) * 0.08} className="h-full">
-      <article className="panel spotlight group flex h-full flex-col transition-colors duration-300 hover:border-emerald-400/40">
-        <button onClick={onOpen} className="block text-left" aria-label={`Open details for ${project.title}`}>
+    <Reveal delay={wide ? 0 : ((index + 1) % 2) * 0.08} className={`h-full ${wide ? "md:col-span-2" : ""}`}>
+      <article
+        className={`panel spotlight group flex h-full flex-col transition-colors duration-300 hover:border-emerald-400/40 ${
+          wide ? "lg:grid lg:grid-cols-[1.15fr_1fr]" : ""
+        }`}
+      >
+        <button onClick={onOpen} className={`block text-left ${wide ? "lg:h-full" : ""}`} aria-label={`Open details for ${project.title}`}>
           {project.image && (
-            <div className="relative">
+            <div className={`relative ${wide ? "lg:h-full" : ""}`}>
               <ProjectImage
                 src={project.image}
                 alt={project.imageAlt || project.title}
                 light={project.imageLight}
                 darken
-                className="aspect-[16/9] border-x-0 border-t-0"
+                className={wide ? "aspect-[16/10] border-x-0 border-t-0 lg:aspect-auto lg:h-full lg:border-b-0 lg:border-r" : "aspect-[16/9] border-x-0 border-t-0"}
               />
               <span className="absolute right-3 top-3 flex items-center gap-1 bg-black/70 px-2 py-1 font-mono text-[10px] tracking-[0.15em] text-emerald-300 opacity-0 transition-opacity group-hover:opacity-100">
                 <Maximize2 className="h-3 w-3" /> DETAILS
@@ -146,8 +151,10 @@ function FeaturedCard({ project, index, onOpen }: { project: Project; index: num
           )}
         </button>
         <div className="flex flex-1 flex-col p-6">
-          <p className="font-mono text-[10px] tracking-[0.2em] text-zinc-500">0{index + 1} · FEATURED</p>
-          <h3 className="mt-2 font-display text-xl font-semibold leading-snug text-zinc-50 transition-colors group-hover:text-emerald-300">
+          <p className="font-mono text-[10px] tracking-[0.2em] text-zinc-500">
+            0{index + 1} · FEATURED{wide && <span className="ml-2 border border-emerald-400/50 px-1.5 py-0.5 text-emerald-300">NEW · ROS 2</span>}
+          </p>
+          <h3 className={`mt-2 font-display font-semibold leading-snug text-zinc-50 transition-colors group-hover:text-emerald-300 ${wide ? "text-2xl" : "text-xl"}`}>
             <button onClick={onOpen} className="text-left">
               {project.title}
             </button>
@@ -245,7 +252,7 @@ export default function Projects() {
         index="04"
         label="PROJECTS"
         title="Projects"
-        intro="Robotics work first — sensing, navigation and learning-based control — followed by hardware builds and computer vision."
+        intro="Robotics work first — ROS 2 navigation, sensing and learning-based control — followed by hardware builds and computer vision."
       />
 
       <div className="mt-10 grid gap-6 md:grid-cols-2">
