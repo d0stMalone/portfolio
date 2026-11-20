@@ -85,16 +85,28 @@ function LoopVideo({ src, poster, alt }: { src: string; poster: string; alt: str
   useEffect(() => {
     const v = ref.current
     if (!v) return
-    const r = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    setReduce(r)
-    if (r) return
-    // play only while on screen
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) v.play().catch(() => {})
-      else v.pause()
-    }, { threshold: 0.35 })
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setReduce(true)
+      v.pause()
+      return
+    }
+    // pause while off screen to save battery; resume when visible
+    let visible = false
+    const tryPlay = () => visible && v.play().catch(() => {})
+    const io = new IntersectionObserver(
+      ([e]) => {
+        visible = e.isIntersecting
+        if (visible) tryPlay()
+        else v.pause()
+      },
+      { rootMargin: "0px 0px -15% 0px" },
+    )
     io.observe(v)
-    return () => io.disconnect()
+    v.addEventListener("canplay", tryPlay)
+    return () => {
+      io.disconnect()
+      v.removeEventListener("canplay", tryPlay)
+    }
   }, [])
   return (
     <video
@@ -104,6 +116,7 @@ function LoopVideo({ src, poster, alt }: { src: string; poster: string; alt: str
       muted
       loop
       playsInline
+      autoPlay={!reduce}
       preload="metadata"
       controls={reduce}
       aria-label={alt}
