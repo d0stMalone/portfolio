@@ -12,7 +12,14 @@ const description =
 export const metadata = {
   metadataBase: new URL("https://kevalvisaria.com"),
   title: "Keval Visaria",
-  icons: { icon: "favicon-kv.svg" },
+  icons: {
+    icon: [
+      { url: "icon-kv-v3.svg", type: "image/svg+xml" },
+      { url: "icon-kv-v3-32.png", type: "image/png", sizes: "32x32" },
+    ],
+    shortcut: "favicon.ico",
+    apple: "apple-touch-icon.png",
+  },
   description,
   openGraph: {
     type: "website",
