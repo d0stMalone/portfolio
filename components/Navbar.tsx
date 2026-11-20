@@ -94,12 +94,7 @@ export default function Navbar() {
         <div className="flex-1 overflow-y-auto px-8 py-7">
           <p className="hud-label">FIELD / ROBOTICS</p>
           {site.photo ? (
-            <div className="ticks relative mt-4 h-24 w-24 border border-white/15 p-1">
-              <img src={site.photo} alt="Keval Visaria" className="h-full w-full object-cover bg-[radial-gradient(circle_at_50%_40%,rgba(255,138,61,0.32),rgba(255,138,61,0.06)_55%,transparent_75%)] bg-[#0f1013]" />
-              <span className="absolute -bottom-2 -right-2 bg-[#0b0b0d] p-0.5">
-                <Logo className="h-6 w-6" />
-              </span>
-            </div>
+            <img src={site.photo} alt="Keval Visaria" className="-mb-2 mt-2 w-40" />
           ) : (
             <button onClick={() => scrollToSection("about")} className="mt-4 block transition-transform duration-300 hover:-translate-y-0.5" aria-label="Back to top">
               <Logo className="h-14 w-14" />
