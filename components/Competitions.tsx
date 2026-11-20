@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Play, Trophy, Users } from "lucide-react"
+import * as Dialog from "@radix-ui/react-dialog"
+import { Maximize2, Play, Trophy, Users, X } from "lucide-react"
 import Reveal, { SectionHeading } from "./Reveal"
 
 type Entry = {
@@ -126,18 +127,68 @@ function LoopVideo({ src, poster, alt }: { src: string; poster: string; alt: str
   )
 }
 
+function Lightbox({ m, open, onOpenChange }: { m: Media; open: boolean; onOpenChange: (o: boolean) => void }) {
+  return (
+    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-[90] bg-black/90 backdrop-blur-sm" />
+        <Dialog.Content className="fixed inset-0 z-[95] flex flex-col items-center justify-center p-4 focus:outline-none sm:p-10">
+          <Dialog.Title className="sr-only">{m.label}</Dialog.Title>
+          <Dialog.Description className="sr-only">{m.alt}</Dialog.Description>
+          <Dialog.Close
+            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center border border-white/20 bg-black/60 text-zinc-200 transition-colors hover:border-emerald-400 hover:text-emerald-300"
+            aria-label="Close"
+          >
+            <X className="h-5 w-5" />
+          </Dialog.Close>
+          {m.type === "video" ? (
+            <video
+              src={m.src}
+              poster={m.poster}
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              aria-label={m.alt}
+              className="max-h-[85vh] max-w-full border border-white/10 bg-black"
+            />
+          ) : (
+            <img
+              src={m.src}
+              alt={m.alt}
+              className={`max-h-[85vh] max-w-full border border-white/10 object-contain ${m.light ? "bg-white" : "bg-black"}`}
+            />
+          )}
+          <p className="mt-3 font-mono text-[11px] tracking-[0.15em] text-zinc-400">{m.label.toUpperCase()} · ESC TO CLOSE</p>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  )
+}
+
 function MediaPanel({ media }: { media: Media[] }) {
   const [active, setActive] = useState(0)
+  const [expanded, setExpanded] = useState(false)
   const m = media[active]
   return (
     <div className="-mx-6 -mt-6 mb-6 md:-mx-8 md:-mt-8">
-      <div className={`relative aspect-[4/3] overflow-hidden border-b border-white/10 ${m.type === "image" && m.light ? "bg-white" : "bg-black"}`}>
+      <div className={`group relative aspect-[4/3] overflow-hidden border-b border-white/10 ${m.type === "image" && m.light ? "bg-white" : "bg-black"}`}>
         {m.type === "video" ? (
           <LoopVideo key={m.src} src={m.src} poster={m.poster} alt={m.alt} />
         ) : (
           <img key={m.src} src={m.src} alt={m.alt} className="h-full w-full object-contain" loading="lazy" />
         )}
-        <span className="absolute left-3 top-3 border border-white/15 bg-black/60 px-2 py-1 font-mono text-[10px] tracking-[0.15em] text-zinc-300 backdrop-blur-sm">
+        <button
+          onClick={() => setExpanded(true)}
+          className="absolute inset-0 flex cursor-zoom-in items-end justify-end p-3"
+          aria-label={`Expand ${m.label}`}
+        >
+          <span className="flex items-center gap-1.5 border border-white/20 bg-black/60 px-2 py-1 font-mono text-[10px] tracking-[0.15em] text-zinc-200 backdrop-blur-sm transition-colors group-hover:border-emerald-400 group-hover:text-emerald-300">
+            <Maximize2 className="h-3.5 w-3.5" /> EXPAND
+          </span>
+        </button>
+        <span className="pointer-events-none absolute left-3 top-3 border border-white/15 bg-black/60 px-2 py-1 font-mono text-[10px] tracking-[0.15em] text-zinc-300 backdrop-blur-sm">
           {m.label.toUpperCase()}
         </span>
       </div>
@@ -159,6 +210,7 @@ function MediaPanel({ media }: { media: Media[] }) {
           ))}
         </div>
       )}
+      <Lightbox m={m} open={expanded} onOpenChange={setExpanded} />
     </div>
   )
 }
