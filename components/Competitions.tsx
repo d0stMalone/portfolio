@@ -132,7 +132,10 @@ function Lightbox({ m, open, onOpenChange }: { m: Media; open: boolean; onOpenCh
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-[90] bg-black/90 backdrop-blur-sm" />
-        <Dialog.Content className="fixed inset-0 z-[95] flex flex-col items-center justify-center p-4 focus:outline-none sm:p-10">
+        <Dialog.Content
+          onClick={(e) => e.target === e.currentTarget && onOpenChange(false)}
+          className="fixed inset-0 z-[95] flex flex-col items-center justify-center p-4 focus:outline-none sm:p-10"
+        >
           <Dialog.Title className="sr-only">{m.label}</Dialog.Title>
           <Dialog.Description className="sr-only">{m.alt}</Dialog.Description>
           <Dialog.Close
@@ -160,7 +163,7 @@ function Lightbox({ m, open, onOpenChange }: { m: Media; open: boolean; onOpenCh
               className={`max-h-[85vh] max-w-full border border-white/10 object-contain ${m.light ? "bg-white" : "bg-black"}`}
             />
           )}
-          <p className="mt-3 font-mono text-[11px] tracking-[0.15em] text-zinc-400">{m.label.toUpperCase()} · ESC TO CLOSE</p>
+          <p className="mt-3 font-mono text-[11px] tracking-[0.15em] text-zinc-400">{m.label.toUpperCase()}<span className="hidden sm:inline"> · ESC TO CLOSE</span></p>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
