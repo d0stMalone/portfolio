@@ -1,6 +1,7 @@
 "use client"
 
-import { Trophy, Users } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { Play, Trophy, Users } from "lucide-react"
 import Reveal, { SectionHeading } from "./Reveal"
 
 type Entry = {
@@ -15,7 +16,12 @@ type Entry = {
   // optional — shown only when filled in
   result?: string
   theme?: string
+  media?: Media[]
 }
+
+type Media =
+  | { type: "video"; src: string; poster: string; alt: string; label: string }
+  | { type: "image"; src: string; alt: string; label: string; light?: boolean }
 
 const entries: Entry[] = [
   {
@@ -33,6 +39,16 @@ const entries: Entry[] = [
       "ZigBee/Bluetooth link between robots — 30% more efficient data transfer",
     ],
     tags: ["PCB Design", "Sensor Integration", "Motion Control", "CAN", "ZigBee", "Team Leadership"],
+    theme: "Lagori (2022)",
+    media: [
+      {
+        type: "video",
+        src: "competitions/robocon-lagori.mp4",
+        poster: "competitions/robocon-lagori-poster.webp",
+        alt: "Robocon robots re-stacking the red, blue and white Lagori discs during a match",
+        label: "Match footage",
+      },
+    ],
   },
   {
     name: "FIRST Tech Challenge",
@@ -48,8 +64,90 @@ const entries: Entry[] = [
       "Helped teams turn ideas into robots that could complete complex game tasks",
     ],
     tags: ["Mentoring", "STEM Outreach", "Java", "Robot Design", "FTC", "FRC"],
+    theme: "POWERPLAY (2022–23)",
+    media: [
+      {
+        type: "video",
+        src: "competitions/ftc-powerplay.mp4",
+        poster: "competitions/ftc-powerplay-poster.webp",
+        alt: "FTC robots scoring cones on junction poles during a POWERPLAY match",
+        label: "Match footage",
+      },
+      { type: "image", src: "competitions/ftc-robot-cad.webp", alt: "CAD render of an FTC robot with a lift and cone gripper", label: "Robot CAD", light: true },
+      { type: "image", src: "competitions/ftc-cone.webp", alt: "POWERPLAY cone with a custom signal sleeve", label: "Signal sleeve" },
+    ],
   },
 ]
+
+function LoopVideo({ src, poster, alt }: { src: string; poster: string; alt: string }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  const [reduce, setReduce] = useState(false)
+  useEffect(() => {
+    const v = ref.current
+    if (!v) return
+    const r = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    setReduce(r)
+    if (r) return
+    // play only while on screen
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) v.play().catch(() => {})
+      else v.pause()
+    }, { threshold: 0.35 })
+    io.observe(v)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <video
+      ref={ref}
+      src={src}
+      poster={poster}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      controls={reduce}
+      aria-label={alt}
+      className="h-full w-full object-cover"
+    />
+  )
+}
+
+function MediaPanel({ media }: { media: Media[] }) {
+  const [active, setActive] = useState(0)
+  const m = media[active]
+  return (
+    <div className="-mx-6 -mt-6 mb-6 md:-mx-8 md:-mt-8">
+      <div className={`relative aspect-[4/3] overflow-hidden border-b border-white/10 ${m.type === "image" && m.light ? "bg-white" : "bg-black"}`}>
+        {m.type === "video" ? (
+          <LoopVideo key={m.src} src={m.src} poster={m.poster} alt={m.alt} />
+        ) : (
+          <img key={m.src} src={m.src} alt={m.alt} className="h-full w-full object-contain" loading="lazy" />
+        )}
+        <span className="absolute left-3 top-3 border border-white/15 bg-black/60 px-2 py-1 font-mono text-[10px] tracking-[0.15em] text-zinc-300 backdrop-blur-sm">
+          {m.label.toUpperCase()}
+        </span>
+      </div>
+      {media.length > 1 && (
+        <div className="flex gap-2 border-b border-white/10 bg-black/30 p-2">
+          {media.map((x, i) => (
+            <button
+              key={x.src}
+              onClick={() => setActive(i)}
+              aria-label={`Show ${x.label}`}
+              aria-pressed={i === active}
+              className={`relative h-14 w-20 overflow-hidden border transition-colors ${
+                i === active ? "border-emerald-400" : "border-white/10 opacity-60 hover:opacity-100"
+              } ${x.type === "image" && x.light ? "bg-white" : "bg-black"}`}
+            >
+              <img src={x.type === "video" ? x.poster : x.src} alt="" className={`h-full w-full ${x.type === "image" && x.light ? "object-contain" : "object-cover"}`} />
+              {x.type === "video" && <Play className="absolute inset-0 m-auto h-4 w-4 text-white drop-shadow" />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function Competitions() {
   return (
@@ -65,7 +163,8 @@ export default function Competitions() {
           const Icon = e.kind === "Mentor" ? Users : Trophy
           return (
             <Reveal key={e.name} delay={i * 0.08} className="h-full">
-              <article className="panel ticks spotlight flex h-full flex-col p-6 transition-colors duration-300 hover:border-emerald-400/40 md:p-8">
+              <article className="panel ticks spotlight flex h-full flex-col overflow-hidden p-6 transition-colors duration-300 hover:border-emerald-400/40 md:p-8">
+                {e.media && <MediaPanel media={e.media} />}
                 <div className="flex items-start justify-between gap-4">
                   <span className="flex h-11 w-11 items-center justify-center border border-emerald-400/30 bg-emerald-400/10">
                     <Icon className="h-5 w-5 text-emerald-300" />
